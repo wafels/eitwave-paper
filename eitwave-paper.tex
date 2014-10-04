@@ -1,0 +1,50 @@
+\documentclass[12pt]{iopart}
+%Uncomment next line if AMS fonts required
+%\usepackage{iopams}
+
+\usepackage{natbib}
+\newcommand*{\newblock}{Bibliography}
+
+\usepackage{minted}
+\usepackage{upquote}
+\AtBeginDocument{%
+\def\PYZsq{\textquotesingle}%
+}
+\definecolor{bg}{rgb}{0.95, 0.95, 0.95}
+\usepackage{hyperref}
+
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote} %the perpage package command
+
+\usepackage{aas_macros}
+
+\begin{document}
+
+\title{A demonstration algorithm for the automated detection of EUV waves}
+
+\input{authors}
+
+\input{abstract}
+
+\maketitle
+
+\input{1-Introduction}
+
+\input{2-Existing}
+
+\input{3-AWARE}
+
+\input{4-Results}
+
+\input{5-Conclusions}
+
+\input{acknowledgements}
+
+%%% References
+\bibliographystyle{stunat}
+\bibliography{eitwave-paper, instrument_refs, software_refs}{}
+
+\end{document}
