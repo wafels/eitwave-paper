@@ -2,12 +2,12 @@
 
 The purpose of the Automated Wave Analysis and Reduction in EUV (AWARE) algorithm (see Fig. 3) is to detect and characterize the fundamental properties of EUV waves, and make those detections available to the solar community. Automated feature detection algorithms have an advantage over human detections of features because they generate repeatable results for the same input data.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{aware_figure4.pdf}
-\caption{Caption here}
-\end{center}
-\end{figure}
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=16cm]{aware_figure4.pdf}
+%\caption{Caption here}
+%\end{center}
+%\end{figure}
 
 \subsection{Data Acquisition and Image Processing}
 
@@ -26,12 +26,12 @@ As was noted in Sections 1 and 2, EUV waves are difficult to detect since they a
 
 The final product is therefore a time-ordered series of images that localize the bright wavefront of the EUV wave.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{aware_rdpm_figure_v3.pdf}
-\caption{Caption here}
-\end{center}
-\end{figure}
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=16cm]{aware_rdpm_figure_v3.pdf}
+%\caption{Caption here}
+%\end{center}
+%\end{figure}
 
 
 
@@ -41,11 +41,11 @@ The advantages of RDPIs over other common initial steps of isolating propagating
 
 Steps 3 and 4 of the AWARE image processing method (Fig. 4c, 4d) apply some basic noise reduction and feature enhancement techniques to further refine the final images.  The bulk of the development phase of AWARE will consist of exploring image processing techniques for noise reduction, feature enhancement and feature segmentation in order to maximize the information about the wavefront \citep[see][ch. 3, 4, 5, 9 \& 10 for many potential improvements]{2002dip..book.....G}.  For example, we will test the efficacy of making the noise threshold in Step 3 time-dependent, to account for the weakening of the wavefront as it propagates.  In Step 4, we will apply the morphological closing operation using multiple length-scales, and average those results: this will test if a multi-scale approach determines more detail in the wavefront.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{aware_velocity_figure_v3.pdf}
-\caption{Caption here}
-\end{center}
-\end{figure}
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=16cm]{aware_velocity_figure_v3.pdf}
+%\caption{Caption here}
+%\end{center}
+%\end{figure}
 
 The advantage of this approach is twofold. Firstly, we do not have to fit a complex profile to noisy data in order to locate the wavefront. Secondly, the RDPIs remove much more structure that is not associated with a propagating bright front (Fig. 2, bottom row) compared to the PBD images (Fig. 2, top-row), and therefore better isolates the wavefront, making noise-cleaning easier (Fig. 4).  NEMO \citep{2005SoPh..228..265P} uses integrals of annuli of RD images (Fig. 2, middle row) to make their detections (Sec. 2.3).  The advantage of our approach over NEMO is also twofold.  Firstly, some EUV waves do not propagate circularly (for example, wave A, Fig. 2) and therefore the annular assumption can lead to a weakened detection.  Secondly, RD images contain dimming and brightening structure unconnected with the EUV wavefront, and are noisier,  when compared to RDPIs, making isolation of the wavefront from these confounding features more difficult. The final result of the first component of AWARE is a time-series of images that may contain an EUV wave.  The second component of AWARE detects the presence of a wave, assesses its quality, and characterizes its propagation through the solar atmosphere.
