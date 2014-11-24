@@ -1,19 +1,5 @@
 \section{AWARE}\label{sec:aware}
 
-The purpose of the Automated Wave Analysis and Reduction in EUV (AWARE) algorithm (see Fig. 3) is to detect and characterize the fundamental properties of EUV waves, and make those detections available to the solar community. Automated feature detection algorithms have an advantage over human detections of features because they generate repeatable results for the same input data. AWARE is written in Python and makes use of features provided by the SunPy data analysis package.
-
-%\begin{figure}
-%\begin{center}
-%\includegraphics[width=16cm]{aware_figure4.pdf}
-%\caption{Caption here}
-%\end{center}
-%\end{figure}
-
-\subsection{Data Acquisition}
-
-
-\subsection{Image Processing}
-
 As was noted in Sections 1 and 2, EUV waves are difficult to detect since they are faint, extensive and propagate over a complex background image (the solar corona). This realisation has driven past attempts to enhance and detect EUV waves by making use of running difference or base-difference images. However, these images, while enhancing potential wavefronts, remain noisy and populated by other extraneous features. For AWARE, we therefore choose a different approach, adopting a new, simple and very promising strategy for segmenting an EUV wave wavefront from image data. Instead of using traditional running- or base-difference image processing, we make use of persistence imaging, as described by \citet{2014AAS...22421838T}. 
 
 A persistence image is found by calculating the persistence value of a pixel at all locations and times.  The persistence value is simply the maximum value reached by that pixel in the time range 0→$t_{max}$.  If at later times the pixel value increases, the persistence value increases accordingly. If the pixel value decreases however, the persistence value remains unchanged. Hence, a set of persistence maps constructed from an image sequence will indicate the brightest values yet achieved in that sequence at each $t$. By obtaining sets of persistence images from input solar EUV image data, and performing a running difference operation on these images, rather than the original input data, we are able to substantially enhance the appearance of propagating waves.
