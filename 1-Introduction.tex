@@ -1,10 +1,18 @@
 \section{Introduction}\label{sec:Intro}
 
 Extreme ultraviolet (EUV) waves are large-scale propagating
-disturbances observed in the solar corona. These waves were discovered through observations made by SOHO/EIT \citep{1997SoPh..175..571M, 1998GeoRL..25.2465T, 1999ApJ...517L.151T}, and were hence initally dubbed `EIT' waves. Since those first observations, over two hundred papers discussing their properties, causes and physics have been published. EUV waves appear to be strongly associated with CME activity \cite{2002ApJ...569.1009B}, and do a lesser extent with solar flares \cite{2006ApJ...641L.153}. However, at a fundamental level, the physical nature of EUV waves is not
-completely understood. 
+disturbances observed in the solar corona. These waves were discovered
+through observations made by SOHO/EIT \citep{1997SoPh..175..571M,
+  1998GeoRL..25.2465T, 1999ApJ...517L.151T}, and were hence initally
+dubbed `EIT' waves. Since those first observations, over two hundred
+papers discussing their properties, causes and physics have been
+published. EUV waves appear to be strongly associated with CME
+activity \cite{2002ApJ...569.1009B}, and do a lesser extent with solar
+flares \cite{2006ApJ...641L.153}. However, at a fundamental level, the
+physical nature of EUV waves is not completely understood.
 
-In interpreting thse phenomena, some studies present evidence supporting a magnetohydrodynamic (MHD) wave interpretation
+In interpreting thse phenomena, some studies present evidence
+supporting a magnetohydrodynamic (MHD) wave interpretation
 \citep{1998GeoRL..25.2465T, 1999ApJ...517L.151T,2000ApJ...543L..89W,
   2001JGR...10625089W, 2002ApJ...574..440O, 2010ApJ...713.1008S},
 others argue for what \cite{2012SoPh..281..187P} call a “pseudo-wave”
@@ -18,8 +26,12 @@ pseudo-waves \citep{2002ApJ...572L..99C, 2005ApJ...622.1202C,
   2004A&A...427..705Z, 2009ApJ...705..587C}.  It is clear from the
 literature that the physical conditions that lead to the broad range
 of observed wave propagation speeds \citep{2011A&A...532A.151W} and
-amplitudes are poorly understood. EUV waves are also clearly correlated with several other dynamic
-phenomena in addition to CMEs and flares. For example, investigations such as \cite{2000SoPh..193..161T}, \cite{2004A&A...427..705Z} and \cite{2010ApJ...709..369P} have indicated that the development of coronal dimmings may be closely linked to the development of EUV
+amplitudes are poorly understood. EUV waves are also clearly
+correlated with several other dynamic phenomena in addition to CMEs
+and flares. For example, investigations such as
+\cite{2000SoPh..193..161T}, \cite{2004A&A...427..705Z} and
+\cite{2010ApJ...709..369P} have indicated that the development of
+coronal dimmings may be closely linked to the development of EUV
 waves.
 
 The path of EUV waves have been observed to be modified by nearly all
@@ -31,12 +43,14 @@ details about the wave interaction with these features. However, the
 impulsive excitation, and the range of interactions between the EUV
 waves and other coronal structures are still unknown.
 
-Some authors have also explored the potential of EUV waves in diagnosing properties of the coronal medium that
-are otherwise hard to measure, i.e., their use as tools to
-perform coronal seismology \citep{1970PASJ...22..341U}. For example, if a fast MHD wave mode interpretation is assumed, (see
-\cite{2011SSRv..158..365G}, for a review of current interpretations of
-EUV waves), then the wave propagation speed, coronal density and
-temperature can all be estimated from observations, allowing the coronal magnetic field
+Some authors have also explored the potential of EUV waves in
+diagnosing properties of the coronal medium that are otherwise hard to
+measure, i.e., their use as tools to perform coronal seismology
+\citep{1970PASJ...22..341U}. For example, if a fast MHD wave mode
+interpretation is assumed, (see \cite{2011SSRv..158..365G}, for a
+review of current interpretations of EUV waves), then the wave
+propagation speed, coronal density and temperature can all be
+estimated from observations, allowing the coronal magnetic field
 strength to be derived \cite{2005LRSP....2....3N}.  This value can
 also be used to test the accuracy of magnetic field extrapolation
 codes \citep{2008ApJ...675.1637S} and other indirect measurements of
@@ -68,31 +82,44 @@ the coronal magnetic field strength \citep{2007Sci...317.1192T}.
 %than do flares, while \cite{2006ApJ...641L.153} found that only
 %eruptive flares were associated with EUV waves.  
 
-
-
-Recent advances in solar instrumentation have allowed substantial progress to
-be made over early SOHO/EIT observations. Data from STEREO/EUVI provided a
-significant improvement in both spatial and temporal resolution (e.g., Long
-et al. 2008, Veronig, Temmer, & Vršnak 2008).  Critically, with the launch of SDO in 2010,
+Recent advances in solar instrumentation have allowed substantial
+progress to be made over early SOHO/EIT observations. Data from
+STEREO/EUVI provided a significant improvement in both spatial and
+temporal resolution (e.g., \cite{2008ApJ...680L..81L,
+  2008ApJ...681L.113V}.  Critically, with the launch of SDO in 2010,
 highly detailed, multi-wavelength observations of EUV waves are now
 possible (e.g. Fig. 2), illuminating the complex structure and
-interactions of these waves (e.g., Liu et al. 2012). With these new
-data, studies of individual wave events (e.g., Long, DeLuca &
-Gallagher 2011) have augmented earlier kinematic studies (Wills-Davey
-& Thompson, 1999; Wang, 2000), improving the description of the
-initiation and subsequent deceleration of EUV waves.
+interactions of these waves (e.g., \cite{2012ApJ...753...52L}). With
+these new data, studies of individual wave events (e.g.,
+\cite{2011ApJ...741L..21L}) have augmented earlier kinematic studies
+\citep{1999SoPh..190..467W, 2000ApJ...543L..89W}, improving the
+description of the initiation and subsequent deceleration of EUV
+waves.
 
-However, a key limitation is that, in order to answer all of the fundamental questions regarding the
-physical nature of EUV waves, studying individual wave events or small
-samples is insufficient. To make the next breakthrough in
-understanding this phenomenon requires large-scale statistical studies
-with events robustly categorized by their properties. Such studies are too time-intensive in scope to be carried out manually. Hence, in this paper we present the Automated Wave Analysis and Reduction in EUV (AWARE) algorithm, a new automated EUV wave
-detection and characterization procedure applied to EUV image
+However, a key limitation is that, in order to answer all of the
+fundamental questions regarding the physical nature of EUV waves,
+studying individual wave events or small samples is insufficient. To
+make the next breakthrough in understanding this phenomenon requires
+large-scale statistical studies with events robustly categorized by
+their properties. Such studies are too time-intensive in scope to be
+carried out manually. Hence, in this paper we present the Automated
+Wave Analysis and Reduction in EUV (AWARE) algorithm, a new automated
+EUV wave detection and characterization procedure applied to EUV image
 data. Such a fully automated procedure is essential in order to unlock
-the full potential of the large full-disk image datasets available from SDO and STEREO, and
-enables the characterization of EUV waves in large numbers. AWARE has been developed in the Python programming language, and makes use of features provided by the SunPy data analysis package [CITATION]. AWARE is also a fully open-source, version controlled package, which is freely available.
+the full potential of the large full-disk image datasets available
+from SDO and STEREO, and enables the characterization of EUV waves in
+large numbers. AWARE has been developed in the Python programming
+language, and makes use of features provided by the SunPy data
+analysis package \citep{mumford-proc-scipy-2013}. AWARE is also a
+fully open-source, version controlled package, which is freely
+available.
 
-In Section 2 we discuss existing algorithms for the detection of solar features, including EUV waves, and their current status. In Section 3 we discuss in detail the AWARE algorithm and pipeline. In Section 4 we present a number of examples of successful detections with the algorithm, and demonstrate its diagnostic and characterization features. 
+In Section 2 we discuss existing algorithms for the detection of solar
+features, including EUV waves, and their current status. In Section 3
+we discuss in detail the AWARE algorithm and pipeline. In Section 4 we
+present a number of examples of successful detections with the
+algorithm, and demonstrate its diagnostic and characterization
+features.
 
  %AWARE will not only detect and characterize EUV waves in
 %near real-time, but will also provide data products and event
