@@ -12,14 +12,22 @@ segmenting an EUV wave wavefront from image data. Instead of using
 traditional running- or base-difference image processing, we make use
 of persistence imaging, as described by \citet{2014AAS...22421838T}.
 
-A persistence image is found by calculating the persistence value of a
-pixel at all locations and times.  The persistence value is simply the
-maximum value reached by that pixel in the time range 0→$t_{max}$.  If
-at later times the pixel value increases, the persistence value
-increases accordingly. If the pixel value decreases however, the
+A persistence image is found by calculating the persistence value of
+the emission at each pixel at all locations and times.  The
+persistence value at time $t$ of a time series $f(t)$ is simply the
+maximum value reached by that pixel in the time range $0\rightarrow
+t$.  If at later times the pixel value increases, the persistence
+value increases accordingly. If the pixel value decreases however, the
 persistence value remains unchanged. Hence, a set of persistence maps
 constructed from an image sequence will indicate the brightest values
-yet achieved in that sequence at each $t$. By obtaining sets of
+yet achieved in that sequence at each $t$.  The persistence transform
+$P(t)$ of the time-series $f(t)$ is defined as
+\begin{equation}
+\label{eqn:persisttransform}
+P(t) = \max_{t'=0}^{t'=t}f(t').
+\end{equation}
+Figure \ref{fig:persistence} shows the result of the pesistence
+transform applied to some simulated data.  By obtaining sets of
 persistence images from input solar EUV image data, and performing a
 running difference operation on these images, rather than the original
 input data, we are able to substantially enhance the appearance of
@@ -39,7 +47,17 @@ from the EUV, greatly simplifying the resulting images.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=16cm]{aware_rdpm_figure_v3.pdf}
+\includegraphics[width=16cm]{persistence_explanation.eps}
+\caption{Example of the application of the persistence transform.  The
+original data $f(t)$ is shown in blue, and its persistence transform
+$P(t)$ is shown in green.}
+\label{fig:persistence}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{aware_rdpm_figure_v3.eps}
 \caption{Imaging processing techniques applied to three EUV waves,
   from 2011 October 1 (left column), 2011 February 13 (center column),
   and 2011 February 15 (right column) respectively. The top row shows
