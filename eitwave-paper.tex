@@ -1,34 +1,140 @@
-\documentclass[12pt]{iopart}
-%Uncomment next line if AMS fonts required
-%\usepackage{iopams}
 
-\usepackage{natbib}
-\newcommand*{\newblock}{Bibliography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                
+%%      SWSC LaTeX class for Journal of Space Weather and Space Climate
+%%      
+%%                                      (c) Springer-Verlag HD
+%%                                      revised by EDP Sciences
+%%                                      further revised by J. Watermann 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%      This demonstration file was derived from aa.dem
+%%  
+%%      AA vers. 7.0, LaTeX class for Astronomy & Astrophysics
+%%      demonstration file
+%%                                                (c) Springer-Verlag HD
+%%                                                revised by EDP Sciences
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%      modified for Journal of Space Weather and Space Climate
+%%      by Jurgen Watermann, Editorial Advisor to SWSC
+%%
+%%      01-04-2012
+%%      02-04-2012 revision 1
+%%      12-07-2012 revision 2
+%%      06-12-2012 revision 3 
+%%      01-01-2014 revision 4
+%%      06-03-2014 revision 4.1
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%      The two sub-figures referenced in this template are of eps and png type,
+%%      respectively, in order to demonstrate the usepackages subfigure and
+%%      epstopdf and thus create pdf-only output 
+%%
+%%      If you want to use TexLive or MikTex together with a bibtex bibliography 
+%%      file you may run Latex2e from the command line 
+%%          pdflatex -shell-escape swsc.tex
+%%          bibtex swsc (do not include an extension such as .tex or .bib)
+%%          pdflatex -shell-escape swsc.tex
+%%          pdflatex -shell-escape swsc.tex
+%%
+%%      A double call to pdflatex after calling bibtex is necessary in order to
+%%      set citations and references correctly and insure that foreward/backward  
+%%      linkage (backref option) is properly applied
+%%      If you use MikTex you may need to make a triple call to pdflatex
+%%
+%%      If you are using TexLive or MikTex but not a bibtex type of bibliography
+%%      you may simply run Latex2e twice from the command line 
+%%          pdflatex -shell-escape swsc.tex
+%%          pdflatex -shell-escape swsc.tex
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%   single column 12-point version for review
+%%
 
-\usepackage{minted}
-\usepackage{upquote}
-\AtBeginDocument{%
-\def\PYZsq{\textquotesingle}%
-}
-\definecolor{bg}{rgb}{0.95, 0.95, 0.95}
-\usepackage{hyperref}
+%%  with traditional abstract
+\documentclass[referee,a4paper,12pt,traditabstract]{swsc} 
+
+%%  with structured abstract 
+%\documentclass[referee,a4paper,12pt,structabstract]{swsc} 
 
 \usepackage{graphicx}
-\graphicspath{{./images/}}
+\usepackage{txfonts}
+\usepackage{subfigure}
+\usepackage{epstopdf}
+\usepackage{lineno}
+\usepackage[authoryear,round]{natbib}
+\usepackage[backref]{hyperref}
+\usepackage{url}
 
-\usepackage{perpage} %the perpage package
-\MakePerPage{footnote} %the perpage package command
+%%    This version assumes using bibtex with the swsc bibliography style file
+\bibliographystyle{swsc}
 
-\usepackage{aas_macros}
+\hypersetup{colorlinks=true,citecolor=cyan,urlcolor=cyan,linkcolor=blue}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+
+\begin{linenumbers}
 
 \title{AWARE: An algorithm for the automated detection and characterization
   of EUV waves in the solar atmosphere}
 
-\input{authors}
 
-\input{abstract}
+   \subtitle{ }
+   
+   \titlerunning{An algorithm for the automated detection of EUV waves}
+
+   \authorrunning{Ireland et al.}
+
+
+%\input{authors}
+
+\author{J. Ireland\inst{1,}\inst{2}\and
+        A. R. Inglis\inst{2,}\inst{3}\and
+        A. Y. Shih\inst{2}\and
+        S. Christe\inst{2}\and
+        S. Mumford\inst{4}\and
+        L. A. Hayes\inst{5}
+          }
+
+\institute{ADNET Systems, Inc.\\
+\email{\href{mailto:jack.ireland@nasa.gov}{jack.ireland@nasa.gov}}
+\and
+NASA Goddard Spaceflight Center, MC 671.1, Greenbelt, MD 20771.
+\and
+Catholic University of America
+\and
+Solar Physics and Space Plasma Research Centre (SP$^{2}$RC), School of Mathematics and Statistics, The University of Sheffield, Hicks Building, Hounsfield Road, Sheffield S3 7RH, UK.
+\and
+School of Physics, Trinity College Dublin, Dublin 2, Ireland.
+}
+
+
+\abstract{Extreme ultraviolet (EUV) waves are large-scale propagating
+disturbances observed in the solar corona, frequently associated with
+coronal mass ejections and flares. Since their discovery over two
+hundred papers discussing their properties, causes and physics have
+been published. However, their fundamental nature and the physics of
+their interactions with other solar phenomena are still not
+understood. To further the understanding of EUV waves, and their
+relation to other solar phenomena, we have constructed the Automated
+Wave Analysis and REduction (AWARE) algorithm for the detection of EUV
+waves over the full Sun. The AWARE algorithm is based on a novel image
+processing approach to isolating the bright wavefront of the EUV as it
+propagates across the corona.  AWARE detects the presence of a
+wavefront, and measures the distance, velocity and acceleration of
+that wavefront across the Sun.  The algorithm is applied to
+simulations of EUV wave propagation and to observed data.  Suggestions
+are also give for further refinements to the basic algorithm presented
+here.}
+
+\keywords{giant planet formation -- $\kappa$-mechanism -- stability of gas spheres}
 
 \maketitle
 
@@ -44,9 +150,9 @@
 
 \input{acknowledgements}
 
-%%% References
-%\bibliographystyle{sunat}
-\bibliography{corseis-refs.bib, euvwave-refs.bib, instrument-refs.bib,
-  software-refs.bib}{}
+\bibliography{eitwave-paper.bib}{}
+
+
+\end{linenumbers}
 
 \end{document}
