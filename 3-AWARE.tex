@@ -63,13 +63,13 @@ $P(t)$ is shown in green.}
   and 2011 February 15 (right column) respectively. The top row shows
   percentage base difference (PBD) images of each event at a selected
   time, the image processing method used by the CorPITA algorithm
-  (Long et al. 2014), while the second row shows the standard running
+  \citep{2014SoPh..289.3279L}, while the second row shows the standard running
   difference (RD) images for these events (used in NEMO analysis,
-  Podladchikova & Berghmans 2005). In the bottom row, we show that the
+  \citep{2005SoPh..228..265P}). In the bottom row, we show that the
   application of running difference persistence images (RDPI) as used
   by AWARE is able to extract the propagating EUV wave much more
-  cleanly. Both Wave B and Wave C were analyzed in Long et al (2014);
-  see their Fig. 7 and 8a respectively.}
+  cleanly. Both Wave B and Wave C were analyzed in
+  \cite{2014SoPh..289.3279L}; see their Fig. 7 and 8a respectively.}
 \label{rpdm_figure}
 \end{center}
 \end{figure}
@@ -102,19 +102,28 @@ demonstrated in Figure \ref{method_figure}.
 \begin{enumerate}
 
 \item Given a set of sequential solar EUV images (e.g. SDO/AIA or
-  STEREO/EUVI data), create a set of persistence images, showing the
-  brightest values obtained in each pixel in the time range 0 -> $t$
+  STEREO/EUVI data), data are summed in time and space to increase the
+  signal to noise ratio of the wave against the background.  Typically
+  AIA images are summed $4\times4$ to form $1024\times1024$ pixel
+  images.  Summed pairs or triplets of these consecutive images are
+  then used in further analysis.
 
-\item Perform a running difference operation on the obtained
+\item The persistence transform is then applied to the resulting image
+  set.  This creates a set of persistence images, showing the
+  brightest values obtained in each pixel (see
+  \ref{eqn:persisttransform}) as a function of time.
+
+\item Perform a running difference operation on the
   persistence images. Hence, only areas that increase in brightness
   from one time to the next remain (Figure \ref{method_figure}b).
 
 \item Apply a noise reduction filter (Figure \ref{method_figure}c).
   Our demonstration algorithm uses a simple two step process.
-  Firstly, all pixel values below a certain threshold are set to zero.
-  Secondly, a median filter with scale size $L$ pixels is applied.
-  This replaces every pixel in the image with the median value found
-  in its neighborhood, a disk of radius $L$ pixels.
+  Firstly, all pixel values abive a certain threshold are set to
+  zero. This filters out spikes in the data. Secondly, a median filter
+  with scale size $L=11$ image pixels is applied.  This replaces every
+  pixel in the image with the median value found in its neighborhood,
+  a disk of radius $L$ pixels.
 
 \item Apply a morphological closing \citep{2002dip..book.....G}
   operation to every frame in the movie (a disk with radius $L$
@@ -128,11 +137,11 @@ localize the bright wavefront of the EUV wave. Figure
 \ref{method_figure} shows each step in this procedure, applied to two
 AIA 211 $\AA$ images during the EUV wave event of 2011 October 1 (Wave
 A in Figure \ref{rpdm_figure}). The result of the key step of
-generating an RDPI (Steps 1 and 2) from the two input images is
-illustrated in panel b). Steps 3 and 4 of the AWARE image processing
+generating an RDPI (Steps 2 and 3) from the two input images is
+illustrated in panel b). Steps 4 and 5 of the AWARE image processing
 method (Figure \ref{method_figure}c, d) apply some basic noise
-reduction and feature enhancement techniques to further refine the
-final images.
+reduction and feature enhancement techniques with the intent to
+further isolate the wave front in the data.
 
 \begin{figure}
 \begin{center}
