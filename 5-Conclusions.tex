@@ -1,3 +1,33 @@
-\section{Conclusions}\label{sec:conclusions}
+\section{Conclusions and future work}\label{sec:conclusions}
 
-Conclusions of the work
+Running difference persistence images (RDPIs) are a simple and novel
+way of isolating faint, propagating bright features in coronal channel
+AIA data.  The AWARE algorithm as presented uses these images as the
+basis for detections and characterizations of EUV waves.  The
+algorithm can be extended in various ways.  For example, AWARE uses
+median filtering at a fixed length-scale to remove noise in the RDPIs.
+A simple extension to this would be to apply the median filter
+uniformly across the image, but use many different scales. Detections
+from each scale-dependent median filtered image would be added up to
+obtain a final composite which has removed noise at multiple
+length-scales.  Another approach would be to use an adaptive median
+filter.  Such median filters
+
+As was noted in Section \ref{sec:results}, the AWARE detections shown in
+Figures \ref{corpita_fig7} and \ref{corpita_fig8a} both show the
+presence of the blooming of the CCD detector due to large flare
+associated with these events.  These are clearly not part of the
+wavefront.  In the future, the processing algorithm should be adjusted
+to detect the presence of these features and mitigate their effects in
+the subsequent detection.
+
+
+A full AWARE algorithm would begin with a source event occuring at
+some point in space and time.  AWARE would then automatically obtain
+the data and perform the image processing and wave assessment steps,
+finally writing a record into a database that is easily accessed
+through existing solar feature and event clients.  AWARE does not yet
+have that capability; however, the simple image processing algorithm
+outlined here is the crucial part in turning the desire for automated
+EUV wave event detection into a reliably functioning asset for the
+solar physics community.
