@@ -6,7 +6,7 @@ background image (the solar corona). This realisation has driven past
 attempts to enhance and detect EUV waves by making use of running
 difference or base-difference images. However, these images, while
 enhancing potential wavefronts, remain noisy and populated by other
-extraneous features. For AWARE, we therefore choose a different
+extraneous features (see Figure \ref{rpdm_figure}). For AWARE, we therefore choose a different
 approach, adopting a new, simple and very promising strategy for
 segmenting an EUV wave wavefront from image data. Instead of using
 traditional running- or base-difference image processing, we make use
@@ -31,9 +31,7 @@ transform applied to some simulated data.  By obtaining sets of
 persistence images from input solar EUV image data, and performing a
 running difference operation on these images, rather than the original
 input data, we are able to substantially enhance the appearance of
-propagating waves.
-
-Running difference persistence images (RDPIs) have two desirable
+propagating waves. This is because running difference persistence images (RDPIs) have two particularly desirable
 properties when searching for EUV waves.  Firstly, only pixels that
 brighten over previous values have a non-zero value in the running
 difference of persistence images, while zero-value pixels correspond
@@ -47,7 +45,7 @@ from the EUV, greatly simplifying the resulting images.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=16cm]{persistence_explanation.eps}
+\includegraphics[width=16cm]{persistence_explanation.pdf}
 \caption{Example of the application of the persistence transform.  The
 original data $f(t)$ is shown in blue, and its persistence transform
 $P(t)$ is shown in green.}
@@ -57,7 +55,7 @@ $P(t)$ is shown in green.}
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=16cm]{differences.eps}
+\includegraphics[width=16cm]{differences.pdf}
 \caption{Imaging processing techniques applied to three EUV waves,
   from 2011 October 1 (left column), 2011 February 13 (center column),
   and 2011 February 15 (right column) respectively. The top row shows
@@ -73,7 +71,6 @@ $P(t)$ is shown in green.}
 \label{rpdm_figure}
 \end{center}
 \end{figure}
-
 
 Figure \ref{rpdm_figure} illustrates the power of RDPIs for three
 example EUV wave events from 2011 October 1 (Wave A), 2011 February 13
@@ -103,14 +100,11 @@ demonstrated in Figure \ref{method_figure}.
 
 \item Given a set of sequential solar EUV images (e.g. SDO/AIA or
   STEREO/EUVI data), data are summed in time and space to increase the
-  signal to noise ratio of the wave against the background.  Typically
-  AIA images are summed $4\times4$ to form $1024\times1024$ pixel
-  images.  Summed pairs or triplets of these consecutive images are
-  then used in further analysis.
+  signal to noise ratio of the wave against the background. Images may be summed in space as desired, for example an AIA image may be binned using $4\times4$ super-pixels to form $1024\times1024$ pixel images. In the time dimension, images may be summed as required. Typically, pairs or triplets of consecutive images are used.
 
 \item The persistence transform is then applied to the resulting image
   set.  This creates a set of persistence images, showing the
-  brightest values obtained in each pixel (see
+  brightest values obtained in each pixel (see Equation
   \ref{eqn:persisttransform}) as a function of time.
 
 \item Perform a running difference operation on the
@@ -119,7 +113,7 @@ demonstrated in Figure \ref{method_figure}.
 
 \item Apply a noise reduction filter (Figure \ref{method_figure}c).
   Our demonstration algorithm uses a simple two step process.
-  Firstly, all pixel values abive a certain threshold are set to
+  Firstly, all pixel values above a certain threshold are set to
   zero. This filters out spikes in the data. Secondly, a median filter
   with scale size $L=11$ image pixels is applied.  This replaces every
   pixel in the image with the median value found in its neighborhood,
@@ -141,7 +135,7 @@ generating an RDPI (Steps 2 and 3) from the two input images is
 illustrated in panel b). Steps 4 and 5 of the AWARE image processing
 method (Figure \ref{method_figure}c, d) apply some basic noise
 reduction and feature enhancement techniques with the intent to
-further isolate the wave front in the data.
+further isolate the wave front in the data. The morphological closing operation is analagous to the automatic behaviour of the human eye, which is adept at smoothing over small-scale noise to identify a single coherent structure.
 
 \begin{figure}
 \begin{center}
@@ -168,8 +162,7 @@ associated with a propagating bright front (Fig. 2, bottom row)
 compared to the PBD images (Fig. 2, top-row), and therefore better
 isolates the wavefront, making noise-cleaning easier (Fig. 4).  NEMO
 \citep{2005SoPh..228..265P} uses integrals of annuli of RD images
-(Fig. 2, middle row) to make their detections (Sec. 2.3).  The
-advantage of our approach over NEMO is also twofold.  Firstly, some
+(Fig. 2, middle row) to make their detections (Sec. 2.3). However, some
 EUV waves do not propagate circularly (for example, wave A, Fig. 2)
 and therefore the annular assumption can lead to a weakened detection.
 Secondly, RD images contain dimming and brightening structure
@@ -177,6 +170,6 @@ unconnected with the EUV wavefront, and are noisier, when compared to
 RDPIs, making isolation of the wavefront from these confounding
 features more difficult. The final result of the first component of
 AWARE is a time-series of images that may contain an EUV wave.  The
-second component of AWARE detects the presence of a wave, assesses its
+next step in the AWARE algorithm is described in Section \ref{sec:results} - here, AWARE detects the presence of a wave, assesses its
 quality, and characterizes its propagation through the solar
 atmosphere.

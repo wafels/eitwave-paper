@@ -1,29 +1,7 @@
-\section{Existing EUV wave detection algorithms}\label{sec:existing}
+\section{Existing EUV wave detection efforts}\label{sec:existing}
 
-Automated feature detection algorithms have an advantage over human
-detections of features because they generate repeatable results for
-the same input data, i.e. they enable reproducability. In addition,
-their ability to examine large quantities of data faster than human
-analysis is invaluable in the SDO era, which produces ~1 TB of solar
-data each day. The solar physics community already makes use of the
-Computer Aided CME Tracking (CACTus: \cite{2004A&A...425.1097R}) and
-Solar Eruptive Event Detection System (SEEDS:
-\cite{2008SoPh..248..485O}) CME catalogs, both of which are generated
-from automated feature detection algorithms.
 
-When relying on such automated procedures, it is scientifically
-valuable to have multiple independently designed and developed
-automatic feature detection algorithms for the same type of feature as
-they allow for cross-checking and verification of results.  By
-comparing the final results, the operation of each feature detection
-algorithm can be better understood. For example,
-\cite{2013ApJ...768..162P} shows that eruption rates from both the
-CACTus and SEEDS CME catalogs are systematically higher in 2003-2012
-compared to 1997-2002, consistent with the weakness of the late cycle
-23 polar fields.  Use of detections from two independently developed
-automated CME detection algorithms greatly strengthens this result.
-
-In terms of EUV waves, there are at least two automated EUV wave
+In terms of EUV waves, there are at least two automated
 detection methods currently published, the Novel EUV wave Machine
 Observing algorithm, described by \cite{2005SoPh..228..265P} (see also
 \cite{2012SoPh..276..479P}) and the Coronal Pulse Identification and
@@ -37,20 +15,22 @@ based on the higher-order moments of running difference (RD) images. A
 RD image is simply the difference between two consecutive images. A
 sharp change in the skewness or kurtosis of the distribution of RD
 image values is a reliable signature that an impulsive event, such as
-a flare or an EUV wave, has been observed in that image. Once a source
-detection has occurred, the second and third components of NEMO are
-triggered to identify eruptive dimmings and EUV waves respectively.
-NEMO assumes that EUV waves propagate circularly from the originating
-event. The wave front is found by integrating RD images in nested
-annuli centered on the originating event.  Plotting these integrals as
-a function of radial distance from the originating event shows a
-leading intensity enhancement which is identified as the EUV wave.
-Results from NEMO are available at \url{http://sidc.be/nemo/};
+a flare or an EUV wave, has been observed in that image.  Results from NEMO are available at \url{http://sidc.be/nemo/};
 however, the implementation ceased operations in 2010 and so there are
 no new EUV detections being provided to the community.
 \cite{2012SoPh..276..479P} is concerned with advances to original NEMO
 algorithm with respect to source event detection and eruptive
 dimmings, and does not explicitly tackle EUV waves.
+
+%Once a source
+%detection has occurred, the second and third components of NEMO are
+%triggered to identify eruptive dimmings and EUV waves respectively.
+%NEMO assumes that EUV waves propagate circularly from the originating
+%event. The wave front is found by integrating RD images in nested
+%annuli centered on the originating event.  Plotting these integrals as
+%a function of radial distance from the originating event shows a
+%leading intensity enhancement which is identified as the EUV wave.
+
 
 The second algorithm that has been developed is CorPITA
 \citep{2014SoPh..289.3279L}. CorPITA uses percentage base-difference

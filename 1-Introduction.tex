@@ -11,11 +11,12 @@ activity \cite{2002ApJ...569.1009B}, and to a lesser extent with solar
 flares \citep{2006ApJ...641L.153}. However, at a fundamental level, the
 physical nature of EUV waves is not completely understood.
 
-In interpreting thse phenomena, some studies present evidence
+In interpreting these phenomena, a variety of explanations have been put forward \citep[see][for a
+review of current interpretations of EUV waves]{2011SSRv..158..365G}. Some studies present evidence
 supporting a magnetohydrodynamic (MHD) wave interpretation
 \citep{1998GeoRL..25.2465T, 1999ApJ...517L.151T,2000ApJ...543L..89W,
   2001JGR...10625089W, 2002ApJ...574..440O, 2010ApJ...713.1008S},
-others argue for what \cite{2012SoPh..281..187P} call a “pseudo-wave”
+while others argue for what \cite{2012SoPh..281..187P} call a “pseudo-wave”
 due to either the evolving manifestations of a CME
 \citep{1999SoPh..190..107D, 2000ApJ...545..512D, 2008SoPh..247..123D,
   2011ApJ...738..167S} or transient localized brightenings
@@ -23,16 +24,7 @@ due to either the evolving manifestations of a CME
 found evidence indicating that the complex brightenings associated
 with EUV waves can be due to a combination of both MHD waves and
 pseudo-waves \citep{2002ApJ...572L..99C, 2005ApJ...622.1202C,
-  2004A&A...427..705Z, 2009ApJ...705..587C}.  It is clear from the
-literature that the physical conditions that lead to the broad range
-of observed wave propagation speeds \citep{2011A&A...532A.151W} and
-amplitudes are poorly understood. EUV waves are also clearly
-correlated with several other dynamic phenomena in addition to CMEs
-and flares. For example, investigations such as
-\cite{2000SoPh..193..161T}, \cite{2004A&A...427..705Z} and
-\cite{2010ApJ...709..369P} have indicated that the development of
-coronal dimmings may be closely linked to the development of EUV
-waves.
+  2004A&A...427..705Z, 2009ApJ...705..587C}. A unified explanation of this phenomenon is complicated by the broad range of observed wave propagation speeds \citep{2011A&A...532A.151W} and amplitudes of EUV waves. 
 
 The path of EUV waves have been observed to be modified by nearly all
 major coronal features, including active regions
@@ -42,46 +34,25 @@ coronal holes \citep{2009ApJ...691L.123G}, streamers
 refraction, reflection and absorption reveal details about the wave
 interaction with these features. However, the impulsive excitation,
 and the range of interactions between the EUV waves and other coronal
-structures are still unknown.
+structures are still unknown. EUV waves are also clearly correlated with several other dynamic phenomena in addition to CMEs
+and flares. For example, investigations such as
+\cite{2000SoPh..193..161T}, \cite{2004A&A...427..705Z} and
+\cite{2010ApJ...709..369P} have indicated that the development of
+coronal dimmings may be closely linked to the development of EUV
+waves.
 
 Some authors have also explored the potential of EUV waves in
 diagnosing properties of the coronal medium that are otherwise hard to
 measure, i.e., their use as tools to perform coronal seismology
 \citep{1970PASJ...22..341U}. For example, if a fast MHD wave mode
-interpretation is assumed, (see \cite{2011SSRv..158..365G}, for a
-review of current interpretations of EUV waves), then the wave
+interpretation is assumed, then the wave
 propagation speed, coronal density and temperature can all be
 estimated from observations, allowing the coronal magnetic field
-strength to be derived \cite{2005LRSP....2....3N}.  This value can
+strength to be derived \citep{2005LRSP....2....3N}.  This value can
 also be used to test the accuracy of magnetic field extrapolation
 codes \citep{2008ApJ...675.1637S} and other indirect measurements of
 the coronal magnetic field strength \citep{2007Sci...317.1192T}.
 
-%their fundamental nature is
-%still not understood. In general, studies of this phenomenon can be
-%assigned to at least one of these broad, non-exclusive categories: the
-%physical nature and appearance of EUV waves, investigation of
-%correlated phenomena, such as CMEs, flares, dimmings, and filament
-%activity, probing the origin or driver of EUV waves, understanding the
-%interaction with and impact on existing coronal features.
-
-%In each of these categories, there have been major breakthroughs in
-%the last several years, primarily due to the availability of
-%high-cadence, multi-wavelength, multi-viewpoint observations from SDO,
-%STEREO, Hinode, and other sources (for comprehensive reviews of recent
-%results see \cite{2011SSRv..158..365G}; \cite{2011JASTP..73.1096Z};
-%\cite{2011A&A...532A.151W}, \cite{2012SoPh..281..187P}).  Careful
-%analysis has yielded a much improved understanding of the EUV wave
-%phenomenon (e.g., Fig. 1), but it is clear that many outstanding
-%questions remain.
-
-
-
-
-% For example, \cite{2002ApJ...569.1009B}
-%demonstrated that CMEs show a much greater association to EUV waves
-%than do flares, while \cite{2006ApJ...641L.153} found that only
-%eruptive flares were associated with EUV waves.  
 
 Recent advances in solar instrumentation have allowed substantial
 progress to be made over early SOHO/EIT observations. Data from
@@ -103,7 +74,17 @@ studying individual wave events or small samples is insufficient. To
 make the next breakthrough in understanding this phenomenon requires
 large-scale statistical studies with events robustly categorized by
 their properties. Such studies are too time-intensive in scope to be
-carried out manually. Hence, in this paper we present the Automated
+carried out manually. Additionally it is challenging to produce statistically reproducable results of large samples with a manual approach. Automated feature detection algorithms have an advantage over human detections of features because they generate repeatable results for
+the same input data, i.e. they enable reproducability. In addition,
+their ability to examine large quantities of data faster than human
+analysis is invaluable in the SDO era, which produces ~1 TB of solar
+data each day. The solar physics community already makes use of the
+Computer Aided CME Tracking (CACTus: \cite{2004A&A...425.1097R}) and
+Solar Eruptive Event Detection System (SEEDS:
+\cite{2008SoPh..248..485O}) CME catalogs, both of which are generated
+from automated feature detection algorithms.
+
+Hence, in this paper we present the Automated
 Wave Analysis and Reduction in EUV (AWARE) algorithm, a new automated
 EUV wave detection and characterization procedure applied to EUV image
 data. Such a fully automated procedure is essential in order to unlock
@@ -113,7 +94,8 @@ large numbers. AWARE has been developed in the Python programming
 language, and makes use of features provided by the SunPy data
 analysis package \citep{mumford-proc-scipy-2013}. AWARE is also a
 fully open-source, version controlled package, which is freely
-available.
+available (see Section X).
+
 
 In Section 2 we discuss existing algorithms for the detection of solar
 features, including EUV waves, and their current status. In Section 3
@@ -121,26 +103,3 @@ we discuss in detail the AWARE algorithm and pipeline. In Section 4 we
 present a number of examples of successful detections with the
 algorithm, and demonstrate its diagnostic and characterization
 features.
-
- %AWARE will not only detect and characterize EUV waves in
-%near real-time, but will also provide data products and event
-%summaries available through the Solar Data Analysis Center.  The
-%output of AWARE will substantially enhance the scientific community’s
-%capabilities in EUV wave research, particularly in the following
-%areas: 
-
-%robustly determining whether different classes of EUV waves,
-%with different physical characteristics, are supported by
-%observations.  
-
-%studying the relationship between EUV waves and
-%associated phenomena, such as coronal dimmings and secondary
-%eruptions.  
-
-%using EUV waves to perform coronal seismology and better
-%understand the properties of the solar corona.  
-
-%the strength of
-%correlations between various wave properties - such as velocity and
-%amplitude - with the properties of the energetic events that produce
-%these waves, for example CME eruption speed and flare magnitude.
