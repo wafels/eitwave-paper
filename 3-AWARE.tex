@@ -1,5 +1,8 @@
 \section{AWARE}\label{sec:aware}
 
+\subsection{Image processing}
+\label{img_proc}
+
 As was noted in Sections 1 and 2, EUV waves are difficult to detect
 since they are faint, extensive and propagate over a complex
 background image (the solar corona). This realisation has driven past
@@ -169,7 +172,14 @@ Secondly, RD images contain dimming and brightening structure
 unconnected with the EUV wavefront, and are noisier, when compared to
 RDPIs, making isolation of the wavefront from these confounding
 features more difficult. The final result of the first component of
-AWARE is a time-series of images that may contain an EUV wave.  The
-next step in the AWARE algorithm is described in Section \ref{sec:results} - here, AWARE detects the presence of a wave, assesses its
-quality, and characterizes its propagation through the solar
-atmosphere.
+AWARE is a time-series of images that may contain an EUV wave.  
+
+\subsection{Wave characterization}
+
+The next step in the AWARE algorithm is to detect the presence of a wave, assess its
+quality, and characterize its propagation through the solar
+atmosphere. After the application of the image processing methods described in Section \ref{img_proc}, the next step in the detection and characterization process is to transform the solar image so that the  “north pole” of the new heliographic coordinate system is the estimated origin of the EUV wave. In these coordinates, a wave propagating uniformly across the Sun takes the form of an approximate straight line, with its velocity entirely in a southward direction [FIGURE EXAMPLE?].  This is the same transform as implemented by \citet{2014SoPh..289.3279L} and \citet{2005SoPh..228..265P}. This makes it easier to find and characterize propagating wavefronts.
+
+The angular distance traversed at each image time is then estimated by taking cross-sections or `slices' of the transformed images and calculating the mean angular distance weighted by the intensity.  Error estimates are found by taking the standard deviation of the angular distance weighted by the intensity. These angular distances are fit with a quadratic equation to estimate the wave velocity and acceleration.
+
+A propagating wave is determined to be present if we can measure its existence at at least one position along the wavefront, and at least two times: this is the minimum amount of information required to define a traveling feature.  CorPITA \citep{2014SoPh..289.3279L} use a quality score to assess how well determined is each part of the EUV wavefront. We adopt a similar apporach, with the intention of extending its usage to make it a powerful and simple tool to let the user decide what constitutes high and low quality EUV waves. For example, by adopting several indicators of the quality of the detection, the user may utilize the average and median scores to determine the overall quality of the event detection.  The minimum, maximum and standard deviation of the score lets the user determine the spread in the detection quality.  
