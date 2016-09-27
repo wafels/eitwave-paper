@@ -12,6 +12,8 @@ segmenting an EUV wave wavefront from image data. Instead of using
 traditional running- or base-difference image processing, we make use
 of persistence imaging, as described by \citet{2014AAS...22421838T}.
 
+\subsection{Segmenting a wave from the image data}\label{sec:aware:segment}
+
 A persistence image is found by calculating the persistence value of
 the emission at each pixel at all locations and times.  The
 persistence value at time $t$ of a time series $f(t)$ is simply the
@@ -117,26 +119,48 @@ demonstrated in Figure \ref{method_figure}.
   persistence images. Hence, only areas that increase in brightness
   from one time to the next remain (Figure \ref{method_figure}b).
 
-\item Apply a noise reduction filter (Figure \ref{method_figure}c).
-  Our demonstration algorithm uses a simple two step process.
-  Firstly, all pixel values abive a certain threshold are set to
-  zero. This filters out spikes in the data. Secondly, a median filter
-  with scale size $L=11$ image pixels is applied.  This replaces every
-  pixel in the image with the median value found in its neighborhood,
-  a disk of radius $L$ pixels.
+\item 
+The following steps are intended to isolate the wavefront at different
+length-scales $r_{1}, r_{2}$\textellipsis, etc, from the noise in the
+datacube.
 
-\item Apply a morphological closing \citep{2002dip..book.....G}
-  operation to every frame in the movie (a disk with radius $L$
-  pixels).  This operation helps close small ‘cracks’ in structures
-  \citep{2002dip..book.....G}.  The final image is shown in Figure
-  \ref{method_figure}d.
+\begin{enumerate}
+
+\item Apply a noise reduction filter (Figure \ref{method_figure}c) to
+  the data cube of images.  Our demonstration algorithm uses a simple
+  two step process.  Firstly, all pixel values in the data cube above
+  a certain threshold are set to zero. This filters out spikes in the
+  data. Secondly, a median filter is applied.  This replaces every
+  pixel in the image with the median value found in its neighborhood.
+  The median filter used is a circle in the spatial dimensions with a
+  given radius $r$.  The median filter also extends in the temporal
+  dimension to the previous and next images in the data cube.  This
+  extension in the temporal dimension improves the noise reduction
+  since emission at recent times are compared.  The median filter is a
+  commonly used and simple method of removing noise from an image
+  \citep{2002dip..book.....G}.
+
+\item Apply a morphological closing operation.  This operation helps
+  close small ‘cracks’ in structures \citep{2002dip..book.....G}.  The
+  structuring element used is the same as that used by the median
+  filtering operation. The final image is shown in Figure
+  \ref{method_figure}d.  The final result is a datacube of images that
+  show the location of the wavefront as a function of time, given the
+  median filter and closing operations performed at length-scale $r$.
 \end{enumerate}
 
-The final product is therefore a time-ordered series of images that
-localize the bright wavefront of the EUV wave. Figure
+\item Add up the wave location datacubes over all the circle radii
+  $r_{1}, r_{2}$\textellipsis, etc.  This is the final wave location
+  datacube that defines the location of the wavefront as a function of
+  time.
+
+\end{enumerate}
+
+The final product is a datacube of time-ordered series of images that
+localize the bright wavefront of the EUV wave.  Figure
 \ref{method_figure} shows each step in this procedure, applied to two
 AIA 211 $\AA$ images during the EUV wave event of 2011 October 1 (Wave
-A in Figure \ref{rpdm_figure}). The result of the key step of
+A in Figure \ref{rpdm_figure}).  The result of the key step of
 generating an RDPI (Steps 2 and 3) from the two input images is
 illustrated in panel b). Steps 4 and 5 of the AWARE image processing
 method (Figure \ref{method_figure}c, d) apply some basic noise
@@ -175,8 +199,43 @@ and therefore the annular assumption can lead to a weakened detection.
 Secondly, RD images contain dimming and brightening structure
 unconnected with the EUV wavefront, and are noisier, when compared to
 RDPIs, making isolation of the wavefront from these confounding
-features more difficult. The final result of the first component of
-AWARE is a time-series of images that may contain an EUV wave.  The
-second component of AWARE detects the presence of a wave, assesses its
-quality, and characterizes its propagation through the solar
-atmosphere.
+features more difficult.
+
+The final result of the first part of AWARE is a time-series of images
+that may contain an EUV wave.  The second part of AWARE searches for
+the presence of a wave, assesses its quality, and characterizes its
+propagation through the solar atmosphere.
+
+\subsection{Determining wave presence and
+  dynamics}\label{sec:aware:dynamics}
+
+The output of the first part of AWARE is a time-series of images that
+indicate regions that were progressively brightening.  The brightening
+is assessed at the length-scales corresponding to the radii $r_{1},
+r_{2}$\textellipsis\ of the median filter and morphological filters.
+Hence the filtering operations have done the important job of at least
+localizing where a wave might be.  The next step is to determine the
+presence of a wave.
+
+It is known that EUV waves are associated with solar eruptive events,
+and so this provides a candidate location and start time for the
+source of the wave. The candidate location is used as a pole to
+transform the view of the Sun in AIA to a heliographic projection with
+the EUV wave source location at one pole.  In this projection, waves
+can be easily measured as they travel along lines of latitude
+(constant longitude) in the new co-ordinate system.  These lines of
+latitude are functionally equivalent to the lines of arc in
+\citet{2014SoPh..289.3279L}, Figure 2(a, b).
+
+At constant longitude, the position of the wavefront is calculated as
+a function of time.  Therefore at each time, the position of the
+wavefront and an estimate of the error in that position must be
+calculated. \citet{2014SoPh..289.3279L} determine the location of the
+wavefront by fitting a model of the intensity profile along the arc.
+
+% How to measure where the wavefront is
+%
+
+After the position and an error in the position of the wavefront have
+been calculated as a function of time, the progress of the wave is fit
+with a quadratic $s = vt + 0.5at^{2}$.  The fitting algorithm is 
