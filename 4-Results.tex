@@ -1,5 +1,6 @@
 \section{Results}\label{sec:results}
 
+<<<<<<< HEAD
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{euvwave_contour_map_corpita_fig7.eps}
@@ -39,3 +40,33 @@
 \label{previous1}
 \end{center}
 \end{figure}
+=======
+\subsection{Detections with simulated wave data}
+
+\subsection{Detections with SDO/AIA image data}
+
+To illustrate the application of the AWARE algorithm to real solar imaging data, we examine a selection of recent events observed by SDO/AIA. These are the flares of 2011 February 13, 2011 February 15, 2011 February 16, and 2011 October 1. These flares serve as a convenient starting point for the search algorithm, given that EUV waves are considered to be triggered phenomenon. 
+
+Figure \ref{results_figure} shows both the result of AWARE image processing (top panels), and wave characterization (bottom panels) steps. For all 4 events, the image processing reveals a propagating front of substantial extent. In Figure \ref{results_figure}, this is illustrated by the coloured maps in the top panels. These maps show the location of the brightest detected features as a function of time, ranging from blue (early times) to red (later times). Differences between the four events are immediately apparent; the 2011 February 15 event propagates outward in all directions approximately circularly. In contrast, the 2011 February 13 and 16 events propagate in narrow cones only, while the 2011 October 1 events extends in a significant arc towards solar southeast. 
+
+For each event, we show an example of the wave characterization along a specific arc of interest (grey arcs, top panels). The arc selected for analysis in each case is the one with the highest quality score, as discussed in Section \ref{wave_char} The resulting velocity fits are shown in Figure \ref{results_figure} (bottom panels), where a quadratic profile has been fit to the angular distance of the detected wavefront. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=4cm]{euvwave_contour_map_previous1.eps}
+\includegraphics[width=4cm]{euvwave_contour_map_corpita_fig7.eps}
+\includegraphics[width=4cm]{euvwave_contour_map_corpita_fig8a.eps}
+\includegraphics[width=4cm]{euvwave_contour_map_corpita_fig8e.eps}
+
+\includegraphics[width=4cm]{previous1.dynamics.27.eps}
+\includegraphics[width=4cm]{corpita_fig7.dynamics.2.eps}
+\includegraphics[width=4cm]{corpita_fig8a.dynamics.40.eps}
+\includegraphics[width=4cm]{corpita_fig8e.dynamics.71.eps}
+\caption{The propagation of detected EUV waves as a function of time, for a) 2011 October 1, b) 2011 February 13, c) 2011 February 15, d) 2011 February 16. For each event, a background image of the Sun is shown, while the colours represent the location of the wavefront detected by AWARE at a given time.}
+\end{center}
+\end{figure}
+
+
+
+
+>>>>>>> b85469fa74b83b4f42b1e586a6318236d8709bca

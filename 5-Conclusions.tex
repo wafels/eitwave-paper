@@ -4,30 +4,42 @@ Running difference persistence images (RDPIs) are a simple and novel
 way of isolating faint, propagating bright features in coronal channel
 AIA data.  The AWARE algorithm as presented uses these images as the
 basis for detections and characterizations of EUV waves.  The
-algorithm can be extended in various ways.  For example, AWARE uses
-median filtering at a fixed length-scale to remove noise in the RDPIs.
-A simple extension to this would be to apply the median filter
-uniformly across the image, but use many different scales. Detections
-from each scale-dependent median filtered image would be added up to
-obtain a final composite which has removed noise at multiple
-length-scales.  Another approach would be to use an adaptive median
-filter.  Such median filters
+algorithm can be extended in various ways.  For example, the noise
+removal step is intended to remove noise from the images, and leave
+the wavefront isolated.  The method used in this paper sums the
+results of the median filter applied at multiple length-scales.  But
+there are a number of other algorithms that can also remove noise.
+For example, \citet{2002dip..book.....G} describe an adaptive median
+filter algorithm that varies the size-scale of the area over which
+the median is calculated based on local greyscale values in the
+image. Two-dimensional wavelets, along with thresholding algorithms
+could be used to determine global (or local) noise levels, segmenting
+the wavefront from the data.
 
-As was noted in Section \ref{sec:results}, the AWARE detections shown in
-Figures \ref{corpita_fig7} and \ref{corpita_fig8a} both show the
-presence of the blooming of the CCD detector due to large flare
-associated with these events.  These are clearly not part of the
-wavefront.  In the future, the processing algorithm should be adjusted
-to detect the presence of these features and mitigate their effects in
-the subsequent detection.
+An operational implementation of the AWARE algorithm would begin with
+a source event occurring at some point in space and time.  Data
+providers would be queried for the relevant image data.  Once that
+data was available and downloaded, AWARE would be used to perform the
+image processing and wave assessment steps, finally writing a record
+into a database that is easily accessed through existing solar feature
+and event databases.  AWARE does not yet have that capability;
+however, the simple image processing algorithm outlined here is the
+crucial part in turning the desire for automated EUV wave event
+detection into a reliably functioning asset for the solar physics
+community.
 
+We have demonstrated the core functionality of AWARE, a new algorithm
+for the detection and characterization of EUV waves in the solar
+corona. As shown in Section \ref{sec:results}, AWARE performs
+effectively, providing confirmed detections of wave both for simulated
+wave data with known parameters, and also for a number of real EUV
+wave events (see Figure \ref{results_figure}). In both cases, mimimal
+human input was required in order to acheive the presented results.
 
-A full AWARE algorithm would begin with a source event occuring at
-some point in space and time.  AWARE would then automatically obtain
-the data and perform the image processing and wave assessment steps,
-finally writing a record into a database that is easily accessed
-through existing solar feature and event clients.  AWARE does not yet
-have that capability; however, the simple image processing algorithm
-outlined here is the crucial part in turning the desire for automated
-EUV wave event detection into a reliably functioning asset for the
-solar physics community.
+The next steps in the development are already underway (see Section
+\ref{sec:future}), including the construction of a consistent AWARE
+data product for disemmination to the solar community. This product
+will include metadata on any detected EUV waves, as well as image
+masks of the detected events. Additional steps will include further
+integration with online heliophysics tools, such as the HEK and VSO
+services.
