@@ -1,5 +1,10 @@
 \section{AWARE}\label{sec:aware}
 
+The AWARE algorithm is in two parts.  The image processing part of
+AWARE is intended to find locations where a propagating wavefront may
+be located.  The 
+
+
 \subsection{Image processing}
 \label{img_proc}
 
@@ -65,16 +70,17 @@ $P(t)$ is shown in green.}
 \includegraphics[width=16cm]{difference_comparison.eps}
 \caption{Imaging processing techniques applied to three EUV waves,
   from 2011 October 1 (left column), 2011 February 13 (center column),
-  and 2011 February 15 (right column) respectively. The top row shows
-  percentage base difference (PBD) images of each event at a selected
-  time, the image processing method used by the CorPITA algorithm
-  \citep{2014SoPh..289.3279L}, while the second row shows the standard
-  running difference (RD) images for these events (used in NEMO
-  analysis, \citep{2005SoPh..228..265P}). In the bottom row, we show
-  that the application of running difference persistence images (RDPI)
-  as used by AWARE is able to extract the propagating EUV wave much
-  more cleanly. Both Wave B and Wave C were analyzed in
-  \cite{2014SoPh..289.3279L}; see their Fig. 7 and 8a respectively.}
+  and 2011 February 15 (right column) respectively. In all plots,
+  black pixels indicate positive changes in emission, white indicates
+  no change in emission, and red indicates a negative change in
+  emission. The top row shows the running difference persistence
+  images (RDPI), the middle row shows the running difference (RD)
+  images (used in NEMO analysis, \citep{2005SoPh..228..265P}), and the
+  bottom row shows the percentage base difference (PBD), used by the
+  CorPITA algorithm \citep{2014SoPh..289.3279L}.  The RDPIs show a
+  cleaner separation of the propagating bright wavefront compared to
+  the other two differencing methods.  \cite{2014SoPh..289.3279L}; see
+  their Fig. 7 and 8a respectively.}
 \label{rpdm_figure}
 \end{center}
 \end{figure}
@@ -97,10 +103,10 @@ image. RD and PBD images also have much denser noise compared to the
 RDPIs of the same data; hence, separating the EUV wave from the noise
 is substantially easier when using RDPIs.
 
-Thus, the RPDI approach is the first step in the detection of EUV
-waves with AWARE. Subsequent image processing steps allow us to refine
-the detection of any propagating features. The major steps in the
-AWARE detection and processing algorithm are described below, and are
+RPD images are the first step in the detection of EUV waves with
+AWARE. Subsequent image processing steps allow us to refine the
+detection of any propagating features. The major steps in the AWARE
+detection and processing algorithm are described below, and are
 demonstrated in Figure \ref{method_figure}.
 
 \begin{enumerate}
@@ -130,19 +136,20 @@ datacube.
 
 \begin{enumerate}
 
+\item All pixel values in the data cube above a certain threshold are
+  set to zero. This filters out spikes in the data.  The data is then
+  rescaled to the range zero to 1.
+
 \item Apply a noise reduction filter (Figure \ref{method_figure}c) to
   the data cube of images.  Our demonstration algorithm uses a simple
-  two step process.  Firstly, all pixel values in the data cube above
-  a certain threshold are set to zero. This filters out spikes in the
-  data. Secondly, a median filter is applied.  This replaces every
-  pixel in the image with the median value found in its neighborhood.
-  The median filter used is a circle in the spatial dimensions with a
-  given radius $r$.  The median filter also extends in the temporal
-  dimension to the previous and next images in the data cube.  This
-  extension in the temporal dimension improves the noise reduction
-  since emission at recent times are compared.  The median filter is a
-  commonly used and simple method of removing noise from an image
-  \citep{2002dip..book.....G}.
+  median filter.  This replaces every pixel in the image with the
+  median value found in its neighborhood.  The median filter used is a
+  circle in the spatial dimensions with a given radius $r$.  The
+  median filter also extends in the temporal dimension to the previous
+  and next images in the data cube.  This extension in the temporal
+  dimension improves the noise reduction since emission at recent
+  times are compared.  The median filter is a commonly used and simple
+  method of removing noise from an image \citep{2002dip..book.....G}.
 
 \item Apply a morphological closing operation.  This operation helps
   close small ‘cracks’ in structures \citep{2002dip..book.....G}.  The
@@ -176,7 +183,7 @@ single coherent structure.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=16cm]{differences.eps}0
+\includegraphics[width=16cm]{show_aware_processing.eps}
 \caption{Plot (a) shows the running difference image between two
   consecutive persistence images. The wavefront is already
   evident. Plot (b) shows the image at the same time after applying
