@@ -42,18 +42,18 @@ transform applied to some simulated data.  By obtaining sets of
 persistence images from input solar EUV image data, and performing a
 running difference operation on these images, rather than the original
 input data, we are able to substantially enhance the appearance of
-propagating waves. This is because running difference persistence
-images (RDPIs) have two particularly desirable properties when
-searching for EUV waves.  Firstly, only pixels that brighten over
-previous values have a non-zero value in the running difference of
-persistence images, while zero-value pixels correspond to areas that
-did not increase in brightness. Hence, since an EUV wave brightens
-neighboring pixels as it moves across the Sun, the RDPIs isolate those
-brightening pixels.  In other words, the RDPIs isolate the leading
-part of the wavefront that brightened new pixels.  Secondly, since
-much of the corona does not vary significantly during an EUV wave,
-RDPIs show very little residual coronal structure distant from the
-EUV, greatly simplifying the resulting images.
+propagating waves. This is because \RDP\ images have two particularly
+desirable properties when searching for EUV waves.  Firstly, only
+pixels that brighten over previous values have a non-zero value in the
+running difference of persistence images, while zero-value pixels
+correspond to areas that did not increase in brightness. Hence, since
+an EUV wave brightens neighboring pixels as it moves across the Sun,
+the \RDP\ images isolate those brightening pixels.  In other words,
+the \RDP\ images isolate the leading part of the wavefront that
+brightened new pixels.  Secondly, since much of the corona does not
+vary significantly during an EUV wave, \RDP\ images show very little
+residual coronal structure distant from the EUV, greatly simplifying
+the resulting images.
 
 \begin{figure}
 \begin{center}
@@ -73,37 +73,38 @@ $P(t)$ is shown in green.}
   and 2011 February 15 (right column) respectively. In all plots,
   black pixels indicate positive changes in emission, white indicates
   no change in emission, and red indicates a negative change in
-  emission. The top row shows the running difference persistence
-  images (RDPI), the middle row shows the running difference (RD)
-  images (used in NEMO analysis, \citep{2005SoPh..228..265P}), and the
-  bottom row shows the percentage base difference (PBD), used by the
-  CorPITA algorithm \citep{2014SoPh..289.3279L}.  The RDPIs show a
-  cleaner separation of the propagating bright wavefront compared to
-  the other two differencing methods.  \cite{2014SoPh..289.3279L}; see
-  their Fig. 7 and 8a respectively.}
+  emission. The top row shows the \RDP\ images, the middle row shows
+  the running difference (RD) images (used in NEMO analysis,
+  \citep{2005SoPh..228..265P}), and the bottom row shows the
+  percentage base difference (PBD), used by the CorPITA algorithm
+  \citep{2014SoPh..289.3279L}.  The \RDP\ images show a cleaner
+  separation of the propagating bright wavefront compared to the other
+  two differencing methods.  \cite{2014SoPh..289.3279L}; see their
+  Fig. 7 and 8a respectively.}
 \label{rpdm_figure}
 \end{center}
 \end{figure}
 
-Figure \ref{rpdm_figure} illustrates the power of RDPIs for three
-example EUV wave events from 2011 October 1 (Wave A), 2011 February 13
-(Wave B), and 2011 February 15 (Wave C) respectively. For each event,
-percentage base difference images (top row), running difference images
-(center row) and RDPIs (bottom row) are shown. Waves B and C from
-Figure \ref{rpdm_figure} were also analyzed by CorPITA in the
-demonstration of that algorithm by \citet{2014SoPh..289.3279L}.  The
-first row shows percentage base difference (PDB) images of each event,
-the basic image type analyzed by the CorPITA algorithm.  The second
-row shows running difference (RD) images, the basic image type
-analyzed by the NEMO algorithm.  The third row shows RDPI images, the
-basic image type analyzed by AWARE. Comparison with RDPIs shows that
-in standard RD or PBD images the wavefront is more diffuse, and much
-coronal structure not associated with the wavefront remains in the
-image. RD and PBD images also have much denser noise compared to the
-RDPIs of the same data; hence, separating the EUV wave from the noise
-is substantially easier when using RDPIs.
+Figure \ref{rpdm_figure} illustrates the power of \RDP\ images for
+three example EUV wave events from 2011 October 1 (Wave A), 2011
+February 13 (Wave B), and 2011 February 15 (Wave C) respectively. For
+each event, percentage base difference images (top row), running
+difference images (center row) and \RDP\ images (bottom row) are
+shown. Waves B and C from Figure \ref{rpdm_figure} were also analyzed
+by CorPITA in the demonstration of that algorithm by
+\citet{2014SoPh..289.3279L}.  The first row shows percentage base
+difference (PDB) images of each event, the basic image type analyzed
+by the CorPITA algorithm.  The second row shows running difference
+(RD) images, the basic image type analyzed by the NEMO algorithm.  The
+third row shows \RDP\ images, the basic image type analyzed by
+AWARE. Comparison with \RDP\ images shows that in standard RD or PBD
+images the wavefront is more diffuse, and much coronal structure not
+associated with the wavefront remains in the image. RD and PBD images
+also have much denser noise compared to the \RDP\ images of the same
+data; hence, separating the EUV wave from the noise is substantially
+easier when using \RDP\ images.
 
-RPD images are the first step in the detection of EUV waves with
+\RDP\ images are the first step in the detection of EUV waves with
 AWARE. Subsequent image processing steps allow us to refine the
 detection of any propagating features. The major steps in the AWARE
 detection and processing algorithm are described below, and are
@@ -172,7 +173,7 @@ localize the bright wavefront of the EUV wave.  Figure
 \ref{method_figure} shows each step in this procedure, applied to two
 AIA 211 $\AA$ images during the EUV wave event of 2011 October 1 (Wave
 A in Figure \ref{rpdm_figure}).  The result of the key step of
-generating an RDPI (Steps 2 and 3) from the two input images is
+generating an \RDP\ image (Steps 2 and 3) from the two input images is
 illustrated in panel b). Steps 4 and 5 of the AWARE image processing
 method (Figure \ref{method_figure}c, d) apply some basic noise
 reduction and feature enhancement techniques with the intent to
@@ -187,28 +188,29 @@ single coherent structure.
 \caption{Plot (a) shows the running difference image between two
   consecutive persistence images. The wavefront is already
   evident. Plot (b) shows the image at the same time after applying
-  the noise removal algorithm (Section \ref{sec:aware:cleaning}).
-  Plot (c) shows the resulting image after the morphological closing
-  operation is applied. Thas the effect of filling in small gaps in
-  the detected wavefront \citep[e.g.][]{2002dip..book.....G}.}
+  the median filter (Section \ref{sec:aware:cleaning}).  Plot (c)
+  shows the resulting image after the morphological closing operation
+  is applied.  This has the effect of filling in small gaps in the
+  detected wavefront \citep[e.g.][]{2002dip..book.....G}. The solar
+  limb is indicated in red}
 \label{method_figure}
 \end{center}
 \end{figure}
 
 The advantage of this approach is twofold. Firstly, we do not have to
 fit a complex profile to noisy data in order to locate the
-wavefront. Secondly, the RDPIs remove much more structure that is not
-associated with a propagating bright front (Fig. 2, bottom row)
-compared to the PBD images (Fig. 2, top-row), and therefore better
-isolates the wavefront, making noise-cleaning easier (Fig. 4).  NEMO
-\citep{2005SoPh..228..265P} uses integrals of annuli of RD images
-(Fig. 2, middle row) to make their detections (Sec. 2.3). However, some
-EUV waves do not propagate circularly (for example, wave A, Fig. 2)
-and therefore the annular assumption can lead to a weakened detection.
-Secondly, RD images contain dimming and brightening structure
-unconnected with the EUV wavefront, and are noisier, when compared to
-RDPIs, making isolation of the wavefront from these confounding
-features more difficult.
+wavefront. Secondly, the \RDP\ process removes much more structure
+that is not associated with a propagating bright front (Fig. 2, bottom
+row) compared to the PBD images (Fig. 2, top-row), and therefore
+better isolates the wavefront, making noise-cleaning easier (Fig. 4).
+NEMO \citep{2005SoPh..228..265P} uses integrals of annuli of RD images
+(Fig. 2, middle row) to make their detections (Sec. 2.3). However,
+some EUV waves do not propagate circularly (for example, wave A,
+Fig. 2) and therefore the annular assumption can lead to a weakened
+detection.  Secondly, RD images contain dimming and brightening
+structure unconnected with the EUV wavefront, and are noisier, when
+compared to \RDP\ images, making isolation of the wavefront from these
+confounding features more difficult.
 
 The final result of the first part of AWARE is a time-series of images
 that may contain an EUV wave.  The second part of AWARE searches for
