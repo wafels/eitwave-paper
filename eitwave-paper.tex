@@ -140,17 +140,617 @@ here.}
 
 \maketitle
 
-\input{1-Introduction}
+\section{Introduction}\label{sec:Intro}
 
-\input{2-Existing}
+Extreme ultraviolet (EUV) waves are large-scale propagating
+disturbances observed in the solar corona. These waves were discovered
+through observations made by SOHO/EIT \citep{1997SoPh..175..571M,
+  1998GeoRL..25.2465T, 1999ApJ...517L.151T}, and were hence initally
+dubbed `EIT' waves. Since those first observations, over two hundred
+papers discussing their properties, causes and physics have been
+published. EUV waves appear to be strongly associated with CME
+activity \cite{2002ApJ...569.1009B}, and to a lesser extent with solar
+flares \citep{2006ApJ...641L.153}. However, at a fundamental level,
+the physical nature of EUV waves is not completely understood.
 
-\input{3-AWARE}
+In interpreting these phenomena, a variety of explanations have been
+put forward \citep[see][for a review of current interpretations of EUV
+waves]{2011SSRv..158..365G}. Some studies present evidence supporting
+a magnetohydrodynamic (MHD) wave interpretation
+\citep{1998GeoRL..25.2465T, 1999ApJ...517L.151T,2000ApJ...543L..89W,
+  2001JGR...10625089W, 2002ApJ...574..440O, 2010ApJ...713.1008S},
+while others argue for what \cite{2012SoPh..281..187P} call a
+“pseudo-wave” due to either the evolving manifestations of a CME
+\citep{1999SoPh..190..107D, 2000ApJ...545..512D, 2008SoPh..247..123D,
+  2011ApJ...738..167S} or transient localized brightenings
+\citep{2007ApJ...656L.101A, 2007AN....328..760A}.  Some authors have
+found evidence indicating that the complex brightenings associated
+with EUV waves can be due to a combination of both MHD waves and
+pseudo-waves \citep{2002ApJ...572L..99C, 2005ApJ...622.1202C,
+  2004A&A...427..705Z, 2009ApJ...705..587C}. A unified explanation of
+this phenomenon is complicated by the broad range of observed wave
+propagation speeds \citep{2011A&A...532A.151W} and amplitudes of EUV
+waves.
 
-\input{4-Results}
+The path of EUV waves have been observed to be modified by nearly all
+major coronal features, including active regions
+\citep{2000ApJ...543L..89W}, filaments \citep{2012ApJ...753...52L},
+coronal holes \citep{2009ApJ...691L.123G}, streamers
+\citep{2013ApJ...766...55K} and with varying degrees of transmission,
+refraction, reflection and absorption reveal details about the wave
+interaction with these features. However, the impulsive excitation,
+and the range of interactions between the EUV waves and other coronal
+structures are still unknown. EUV waves are also clearly correlated
+with several other dynamic phenomena in addition to CMEs and
+flares. For example, investigations such as
+\cite{2000SoPh..193..161T}, \cite{2004A&A...427..705Z} and
+\cite{2010ApJ...709..369P} have indicated that the development of
+coronal dimmings may be closely linked to the development of EUV
+waves.
 
-\input{5-Future-work}
+Some authors have also explored the potential of EUV waves in
+diagnosing properties of the coronal medium that are otherwise hard to
+measure, i.e., their use as tools to perform coronal seismology
+\citep{1970PASJ...22..341U}. For example, if a fast MHD wave mode
+interpretation is assumed, then the wave
+propagation speed, coronal density and temperature can all be
+estimated from observations, allowing the coronal magnetic field
+strength to be derived \citep{2005LRSP....2....3N}.  This value can
+also be used to test the accuracy of magnetic field extrapolation
+codes \citep{2008ApJ...675.1637S} and other indirect measurements of
+the coronal magnetic field strength \citep{2007Sci...317.1192T}.
 
-\input{5-Conclusions}
+
+Recent advances in solar instrumentation have allowed substantial
+progress to be made over early SOHO/EIT observations. Data from
+STEREO/EUVI provided a significant improvement in both spatial and
+temporal resolution (e.g., \cite{2008ApJ...680L..81L,
+  2008ApJ...681L.113V}.  Critically, with the launch of SDO in 2010,
+highly detailed, multi-wavelength observations of EUV waves are now
+possible (e.g. Fig. 2), illuminating the complex structure and
+interactions of these waves (e.g., \cite{2012ApJ...753...52L}). With
+these new data, studies of individual wave events (e.g.,
+\cite{2011ApJ...741L..21L}) have augmented earlier kinematic studies
+\citep{1999SoPh..190..467W, 2000ApJ...543L..89W}, improving the
+description of the initiation and subsequent deceleration of EUV
+waves.
+
+However, a key limitation is that, in order to answer all of the
+fundamental questions regarding the physical nature of EUV waves,
+studying individual wave events or small samples is insufficient. To
+make the next breakthrough in understanding this phenomenon requires
+large-scale statistical studies with events robustly categorized by
+their properties. Such studies are too time-intensive in scope to be
+carried out manually. Additionally it is challenging to produce
+statistically reproducable results of large samples with a manual
+approach. Automated feature detection algorithms have an advantage
+over human detections of features because they generate repeatable
+results for the same input data, i.e. they enable reproducability. In
+addition, their ability to examine large quantities of data faster
+than human analysis is invaluable in the SDO era, which produces ~1 TB
+of solar data each day. The solar physics community already makes use
+of the Computer Aided CME Tracking (CACTus:
+\cite{2004A&A...425.1097R}) and Solar Eruptive Event Detection System
+(SEEDS: \cite{2008SoPh..248..485O}) CME catalogs, both of which are
+generated from automated feature detection algorithms.
+
+Hence, in this paper we present the Automated
+Wave Analysis and Reduction in EUV (AWARE) algorithm, a new automated
+EUV wave detection and characterization procedure applied to EUV image
+data. Such a fully automated procedure is essential in order to unlock
+the full potential of the large full-disk image datasets available
+from SDO and STEREO, and enables the characterization of EUV waves in
+large numbers. AWARE has been developed in the Python programming
+language, and makes use of features provided by the SunPy data
+analysis package \citep{mumford-proc-scipy-2013}. AWARE is also a
+fully open-source, version controlled package, which is freely
+available (see Section X).
+
+
+In Section 2 we discuss existing algorithms for the detection of solar
+features, including EUV waves, and their current status. In Section 3
+we discuss in detail the AWARE algorithm and pipeline. In Section 4 we
+present a number of examples of successful detections with the
+algorithm, and demonstrate its diagnostic and characterization
+features.
+
+\section{Existing EUV wave detection efforts}\label{sec:existing}
+
+In terms of EUV waves, there are at least two automated detection
+methods currently published, the Novel EUV wave Machine Observing
+algorithm, described by \cite{2005SoPh..228..265P} (see also
+\cite{2012SoPh..276..479P}) and the Coronal Pulse Identification and
+Tracking Algorithm described in \cite{2014SoPh..289.3279L}. NEMO was
+originally designed for analysis of SOHO/EIT data, but has since been
+modified to analyze STEREO/EUVI images. The original NEMO algorithm
+\cite{2005SoPh..228..265P} consists of three components. These are 1)
+source event detection, 2) recognition of eruptive dimmings, 3)
+detection and analysis of EUV waves. The event detection component is
+based on the higher-order moments of running difference (RD) images. A
+RD image is simply the difference between two consecutive images. A
+sharp change in the skewness or kurtosis of the distribution of RD
+image values is a reliable signature that an impulsive event, such as
+a flare or an EUV wave, has been observed in that image.  Results from
+NEMO are available at \url{http://sidc.be/nemo/}; however, the
+implementation ceased operations in 2010 and so there are no new EUV
+detections being provided to the community.
+\cite{2012SoPh..276..479P} is concerned with advances to original NEMO
+algorithm with respect to source event detection and eruptive
+dimmings, and does not explicitly tackle EUV waves.
+
+%Once a source
+%detection has occurred, the second and third components of NEMO are
+%triggered to identify eruptive dimmings and EUV waves respectively.
+%NEMO assumes that EUV waves propagate circularly from the originating
+%event. The wave front is found by integrating RD images in nested
+%annuli centered on the originating event.  Plotting these integrals as
+%a function of radial distance from the originating event shows a
+%leading intensity enhancement which is identified as the EUV wave.
+
+
+The second algorithm that has been developed is CorPITA
+\citep{2014SoPh..289.3279L}. CorPITA uses percentage base-difference
+(PBD) images as the foundation for detection (Fig. 2, top row).  A PBD
+image is formed by taking the difference between a selected base image
+and the current image, and then scaling that difference by the base
+image, multiplied by 100.  CorPITA is triggered by the occurrence of a
+flare.  In CorPITA PBD images, the base image is taken two minutes
+before the flare start time. The flare position is used as the origin
+of the EUV wave; great circles intersecting this origin are analyzed
+to identify whether an EUV wave is present. The intensity profile
+along the great circle is fitted for each time-step with a
+multi-Gaussian function, based on the observation of
+\cite{2006ApJ...645..757W} that cross-sections of EUV wave events have
+this approximate form. This assumption allows the wave to be
+characterized in terms of its position, velocity and width. Events and
+data products generated by CorPITA are intended to be made available
+within the HEK \citep{hek2012, 2012SoPh..275...79M}.  
+
+In this context, AWARE provides a new, alternative approach for the
+detection and characterization of EUV waves.  In the following
+Sections, we describe in detail the imaging processing steps in AWARE,
+and demonstrate its application to solar data.
+
+\section{AWARE}\label{sec:aware}
+
+The AWARE algorithm is in two parts.  The image processing part of
+AWARE is intended to find locations where a propagating wavefront may
+be located.  The 
+
+
+\subsection{Image processing}
+\label{img_proc}
+
+As was noted in Sections 1 and 2, EUV waves are difficult to detect
+since they are faint, extensive and propagate over a complex
+background image (the solar corona). This realisation has driven past
+attempts to enhance and detect EUV waves by making use of running
+difference or base-difference images. However, these images, while
+enhancing potential wavefronts, remain noisy and populated by other
+extraneous features (see Figure \ref{rpdm_figure}). For AWARE, we
+therefore choose a different approach, adopting a new, simple and very
+promising strategy for segmenting an EUV wave wavefront from image
+data. Instead of using traditional running- or base-difference image
+processing, we make use of persistence imaging, as described by
+\citet{2014AAS...22421838T}.
+
+\subsection{Segmenting a wave from the image data}\label{sec:aware:segment}
+
+A persistence image is found by calculating the persistence value of
+the emission at each pixel at all locations and times.  The
+persistence value at time $t$ of a time series $f(t)$ is simply the
+maximum value reached by that pixel in the time range $0\rightarrow
+t$.  If at later times the pixel value increases, the persistence
+value increases accordingly. If the pixel value decreases however, the
+persistence value remains unchanged. Hence, a set of persistence maps
+constructed from an image sequence will indicate the brightest values
+yet achieved in that sequence at each $t$.  The persistence transform
+$P(t)$ of the time-series $f(t)$ is defined as
+\begin{equation}
+\label{eqn:persisttransform}
+P(t) = \max_{t'=0}^{t'=t}f(t').
+\end{equation}
+Figure \ref{fig:persistence} shows the result of the pesistence
+transform applied to some simulated data.  By obtaining sets of
+persistence images from input solar EUV image data, and performing a
+running difference operation on these images, rather than the original
+input data, we are able to substantially enhance the appearance of
+propagating waves. This is because \RDP\ images have two particularly
+desirable properties when searching for EUV waves.  Firstly, only
+pixels that brighten over previous values have a non-zero value in the
+running difference of persistence images, while zero-value pixels
+correspond to areas that did not increase in brightness. Hence, since
+an EUV wave brightens neighboring pixels as it moves across the Sun,
+the \RDP\ images isolate those brightening pixels.  In other words,
+the \RDP\ images isolate the leading part of the wavefront that
+brightened new pixels.  Secondly, since much of the corona does not
+vary significantly during an EUV wave, \RDP\ images show very little
+residual coronal structure distant from the EUV, greatly simplifying
+the resulting images.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{persistence_explanation.eps}
+\caption{Example of the application of the persistence transform.  The
+original data $f(t)$ is shown in blue, and its persistence transform
+$P(t)$ is shown in green.}
+\label{fig:persistence}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{difference_comparison.eps}
+\caption{Imaging processing techniques applied to three EUV waves,
+  from 2011 October 1 (left column), 2011 February 13 (center column),
+  and 2011 February 15 (right column) respectively. In all plots,
+  black pixels indicate positive changes in emission, white indicates
+  no change in emission, and red indicates a negative change in
+  emission. The top row shows the \RDP\ images, the middle row shows
+  the running difference (RD) images (used in NEMO analysis,
+  \citep{2005SoPh..228..265P}), and the bottom row shows the
+  percentage base difference (PBD), used by the CorPITA algorithm
+  \citep{2014SoPh..289.3279L}.  The \RDP\ images show a cleaner
+  separation of the propagating bright wavefront compared to the other
+  two differencing methods.  \cite{2014SoPh..289.3279L}; see their
+  Fig. 7 and 8a respectively.}
+\label{rpdm_figure}
+\end{center}
+\end{figure}
+
+Figure \ref{rpdm_figure} illustrates the power of \RDP\ images for
+three example EUV wave events from 2011 October 1 (Wave A), 2011
+February 13 (Wave B), and 2011 February 15 (Wave C) respectively. For
+each event, percentage base difference images (top row), running
+difference images (center row) and \RDP\ images (bottom row) are
+shown. Waves B and C from Figure \ref{rpdm_figure} were also analyzed
+by CorPITA in the demonstration of that algorithm by
+\citet{2014SoPh..289.3279L}.  The first row shows percentage base
+difference (PDB) images of each event, the basic image type analyzed
+by the CorPITA algorithm.  The second row shows running difference
+(RD) images, the basic image type analyzed by the NEMO algorithm.  The
+third row shows \RDP\ images, the basic image type analyzed by
+AWARE. Comparison with \RDP\ images shows that in standard RD or PBD
+images the wavefront is more diffuse, and much coronal structure not
+associated with the wavefront remains in the image. RD and PBD images
+also have much denser noise compared to the \RDP\ images of the same
+data; hence, separating the EUV wave from the noise is substantially
+easier when using \RDP\ images.
+
+\RDP\ images are the first step in the detection of EUV waves with
+AWARE. Subsequent image processing steps allow us to refine the
+detection of any propagating features. The major steps in the AWARE
+detection and processing algorithm are described below, and are
+demonstrated in Figure \ref{method_figure}.
+
+\begin{enumerate}
+
+\item Given a set of sequential solar EUV images (e.g. SDO/AIA or
+  STEREO/EUVI data), data are summed in time and space to increase the
+  signal to noise ratio of the wave against the background. Images may
+  be summed in space as desired, for example an AIA image may be
+  binned using $4\times4$ super-pixels to form $1024\times1024$ pixel
+  images. In the time dimension, images may be summed as
+  required. Typically, pairs or triplets of consecutive images are
+  used.
+
+\item The persistence transform is then applied to the resulting image
+  set.  This creates a set of persistence images, showing the
+  brightest values obtained in each pixel (see Equation
+  \ref{eqn:persisttransform}) as a function of time.
+
+\item Perform a running difference operation on the
+  persistence images. Hence, only areas that increase in brightness
+  from one time to the next remain (Figure \ref{method_figure}b).
+
+\item 
+The following steps are intended to isolate the wavefront at different
+length-scales $r_{1}, r_{2}$\textellipsis, etc, from the noise in the
+datacube.
+
+\begin{enumerate}
+
+\item All pixel values in the data cube above a certain threshold are
+  set to zero. This filters out spikes in the data.  The data is then
+  rescaled to the range zero to 1.
+
+\item Apply a noise reduction filter (Figure \ref{method_figure}c) to
+  the data cube of images.  Our demonstration algorithm uses a simple
+  median filter.  This replaces every pixel in the image with the
+  median value found in its neighborhood.  The median filter used is a
+  circle in the spatial dimensions with a given radius $r$.  The
+  median filter also extends in the temporal dimension to the previous
+  and next images in the data cube.  This extension in the temporal
+  dimension improves the noise reduction since emission at recent
+  times are compared.  The median filter is a commonly used and simple
+  method of removing noise from an image \citep{2002dip..book.....G}.
+
+\item Apply a morphological closing operation.  This operation helps
+  close small ‘cracks’ in structures \citep{2002dip..book.....G}.  The
+  structuring element used is the same as that used by the median
+  filtering operation. The final image is shown in Figure
+  \ref{method_figure}d.  The final result is a datacube of images that
+  show the location of the wavefront as a function of time, given the
+  median filter and closing operations performed at length-scale $r$.
+\end{enumerate}
+
+\item Add up the wave location datacubes over all the circle radii
+  $r_{1}, r_{2}$\textellipsis, etc.  This is the final wave location
+  datacube that defines the location of the wavefront as a function of
+  time.
+
+\end{enumerate}
+
+The final product is a datacube of time-ordered series of images that
+localize the bright wavefront of the EUV wave.  Figure
+\ref{method_figure} shows each step in this procedure, applied to two
+AIA 211 $\AA$ images during the EUV wave event of 2011 October 1 (Wave
+A in Figure \ref{rpdm_figure}).  The result of the key step of
+generating an \RDP\ image (Steps 2 and 3) from the two input images is
+illustrated in panel b). Steps 4 and 5 of the AWARE image processing
+method (Figure \ref{method_figure}c, d) apply some basic noise
+reduction and feature enhancement techniques with the intent to
+further isolate the wave front in the data. The morphological closing
+operation is analagous to the automatic behaviour of the human eye,
+which is adept at smoothing over small-scale noise to identify a
+single coherent structure.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{show_aware_processing.eps}
+\caption{Plot (a) shows the running difference image between two
+  consecutive persistence images. The wavefront is already
+  evident. Plot (b) shows the image at the same time after applying
+  the median filter (Section \ref{sec:aware:cleaning}).  Plot (c)
+  shows the resulting image after the morphological closing operation
+  is applied.  This has the effect of filling in small gaps in the
+  detected wavefront \citep[e.g.][]{2002dip..book.....G}. The solar
+  limb is indicated in red}
+\label{method_figure}
+\end{center}
+\end{figure}
+
+The advantage of this approach is twofold. Firstly, we do not have to
+fit a complex profile to noisy data in order to locate the
+wavefront. Secondly, the \RDP\ process removes much more structure
+that is not associated with a propagating bright front (Fig. 2, bottom
+row) compared to the PBD images (Fig. 2, top-row), and therefore
+better isolates the wavefront, making noise-cleaning easier (Fig. 4).
+NEMO \citep{2005SoPh..228..265P} uses integrals of annuli of RD images
+(Fig. 2, middle row) to make their detections (Sec. 2.3). However,
+some EUV waves do not propagate circularly (for example, wave A,
+Fig. 2) and therefore the annular assumption can lead to a weakened
+detection.  Secondly, RD images contain dimming and brightening
+structure unconnected with the EUV wavefront, and are noisier, when
+compared to \RDP\ images, making isolation of the wavefront from these
+confounding features more difficult.
+
+The final result of the first part of AWARE is a time-series of images
+that may contain an EUV wave.  The second part of AWARE searches for
+the presence of a wave, assesses its quality, and characterizes its
+propagation through the solar atmosphere.
+
+\subsection{Determining wave presence and
+  dynamics}\label{sec:aware:dynamics}
+
+The output of the first part of AWARE is a time-series of images that
+indicate regions that were progressively brightening.  The brightening
+is assessed at the length-scales corresponding to the radii $r_{1},
+r_{2}$\textellipsis\ of the median filter and morphological filters.
+Hence the filtering operations have done the important job of at least
+localizing where a wave might be.  The next step is to determine the
+presence of a wave.
+
+It is known that EUV waves are associated with solar eruptive events,
+and so this provides a candidate location and start time for the
+source of the wave. The candidate location is used as a pole to
+transform the view of the Sun in AIA to a heliographic projection with
+the EUV wave source location at one pole.  In this projection, waves
+can be easily measured as they travel along lines of latitude
+(constant longitude) in the new co-ordinate system.  These lines of
+latitude are functionally equivalent to the lines of arc in
+\citet{2014SoPh..289.3279L}, Figure 2(a, b).
+
+At constant longitude, the position of the wavefront is calculated as
+a function of time.  Therefore at each time, the position of the
+wavefront and an estimate of the error in that position must be
+calculated. \citet{2014SoPh..289.3279L} determine the location of the
+wavefront by fitting a model of the intensity profile along the arc.
+This is the same transform as implemented by
+\citet{2014SoPh..289.3279L} and \citet{2005SoPh..228..265P}. 
+
+%
+% How to measure where the wavefront is
+%
+
+After the position and an error in the position of the wavefront have
+been calculated as a function of time, the progress of the wave is fit
+with a quadratic $s = vt + 0.5at^{2}$.  The fitting algorithm is 
+
+
+features more difficult. The final result of the first component of
+AWARE is a time-series of images that may contain an EUV wave.
+
+The next step in the AWARE algorithm is to detect the presence of a
+wave, assess its quality, and characterize its propagation through the
+solar atmosphere. After the application of the image processing
+methods described in Section \ref{img_proc}, the next step in the
+detection and characterization process is to transform the solar image
+so that the “north pole” of the new heliographic coordinate system is
+the estimated origin of the EUV wave. In these coordinates, a wave
+propagating uniformly across the Sun takes the form of an approximate
+straight line, with its velocity entirely in a southward direction
+[FIGURE EXAMPLE?].
+
+
+The angular distance traversed at each image time is then estimated by
+taking cross-sections or `slices' of the transformed images and
+calculating the mean angular distance weighted by the intensity.
+Error estimates are found by taking the standard deviation of the
+angular distance weighted by the intensity. These angular distances
+are fit with a quadratic equation to estimate the wave velocity and
+acceleration.
+
+A propagating wave is determined to be present if we can measure its
+existence at at least one position along the wavefront, and at least
+two times: this is the minimum amount of information required to
+define a traveling feature.  CorPITA \citep{2014SoPh..289.3279L} use a
+quality score to assess how well determined is each part of the EUV
+wavefront. We adopt a similar apporach, with the intention of
+extending its usage to make it a powerful and simple tool to let the
+user decide what constitutes high and low quality EUV waves. For
+example, by adopting several indicators of the quality of the
+detection, the user may utilize the average and median scores to
+determine the overall quality of the event detection.  The minimum,
+maximum and standard deviation of the score lets the user determine
+the spread in the detection quality.
+
+\section{Results}\label{sec:results}
+
+<<<<<<< HEAD
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{longetal2014_figure4_wave_progress_map.eps}
+
+\caption{Example detection}
+\label{corpita_fig4}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{longetal2014_figure8a_wave_progress_map.eps}
+\caption{Example detection}
+\label{corpita_fig8a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{euvwave_contour_map_corpita_fig6.eps}
+\caption{Example detection}
+\label{corpita_fig6}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{euvwave_contour_map_corpita_fig8e.eps}
+\caption{Example detection}
+\label{corpita_fig8e}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{euvwave_contour_map_previous1.eps}
+\caption{Example detection}
+\label{previous1}
+\end{center}
+\end{figure}
+=======
+
+\subsection{Detections with SDO/AIA image data}
+
+To illustrate the application of the AWARE algorithm to real solar imaging data, we examine a selection of recent events observed by SDO/AIA. These are the flares of 2011 February 13, 2011 February 15, 2011 February 16, and 2011 October 1. These flares serve as a convenient starting point for the search algorithm, given that EUV waves are considered to be triggered phenomenon. 
+
+Figure \ref{results_figure} shows both the result of AWARE image processing (top panels), and wave characterization (bottom panels) steps. For all 4 events, the image processing reveals a propagating front of substantial extent. In Figure \ref{results_figure}, this is illustrated by the coloured maps in the top panels. These maps show the location of the brightest detected features as a function of time, ranging from blue (early times) to red (later times). Differences between the four events are immediately apparent; the 2011 February 15 event propagates outward in all directions approximately circularly. In contrast, the 2011 February 13 and 16 events propagate in narrow cones only, while the 2011 October 1 events extends in a significant arc towards solar southeast. 
+
+For each event, we show an example of the wave characterization along a specific arc of interest (grey arcs, top panels). The arc selected for analysis in each case is the one with the highest quality score, as discussed in Section \ref{wave_char} The resulting velocity fits are shown in Figure \ref{results_figure} (bottom panels), where a quadratic profile has been fit to the angular distance of the detected wavefront. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=4cm]{euvwave_contour_map_previous1.eps}
+\includegraphics[width=4cm]{euvwave_contour_map_corpita_fig7.eps}
+\includegraphics[width=4cm]{euvwave_contour_map_corpita_fig8a.eps}
+\includegraphics[width=4cm]{euvwave_contour_map_corpita_fig8e.eps}
+
+\includegraphics[width=4cm]{previous1.dynamics.27.eps}
+\includegraphics[width=4cm]{corpita_fig7.dynamics.2.eps}
+\includegraphics[width=4cm]{corpita_fig8a.dynamics.40.eps}
+\includegraphics[width=4cm]{corpita_fig8e.dynamics.71.eps}
+\caption{The propagation of detected EUV waves as a function of time, for a) 2011 October 1, b) 2011 February 13, c) 2011 February 15, d) 2011 February 16. For each event, a background image of the Sun is shown, while the colours represent the location of the wavefront detected by AWARE at a given time.}
+\end{center}
+\end{figure}
+
+
+
+
+>>>>>>> b85469fa74b83b4f42b1e586a6318236d8709bca
+
+\section{Future improvements and data products}\label{sec:future}
+
+Several future refinements are currently planned in order to improve
+AWARE and maximize its effectiveness and use to the solar
+community. First among these is integration with the Heliophysics
+Event Knowledgebase (HEK), which will allow AWARE to operate as a
+fully automated, triggered algorithm. In future developments, AWARE
+will monitor the HEK event lists for new events such as solar flares,
+and the appearance of a new event will trigger subsequent
+analysis. The HEK record information will be used to determine
+parameters of the analysis, such as start and end times of the
+interval to be analysed, and potential locations on the Sun of a wave
+origin.
+
+Related to this, another development will be the production of a
+searchable AWARE event catalogue, to be made freely available to the
+heliophysics community. This is the ultimate goal of AWARE. In this
+pipeline, each analysis carried out by AWARE will result in a new
+catalogue record. These records will contain data products of use to
+the solar community, such as event identifiers, association with any
+triggering event, quality and size measurements, and dynamical
+properties of the detected wave, such as velocity and
+acceleration. This AWARE catalogue will be made available through
+dissemination tools currently used by the heliophysics community, such
+as the HEK and the Virtual Solar Observatory (VSO). The availability
+of such a catalogue will allow large-scale statistical studies of EUV
+waves and their properties.
+
+\section{Conclusions and future work}\label{sec:conclusions}
+
+Running difference persistence images (RDPIs) are a simple and novel
+way of isolating faint, propagating bright features in coronal channel
+AIA data.  The AWARE algorithm as presented uses these images as the
+basis for detections and characterizations of EUV waves.  The
+algorithm can be extended in various ways.  For example, the noise
+removal step is intended to remove noise from the images, and leave
+the wavefront isolated.  The method used in this paper sums the
+results of the median filter applied at multiple length-scales.  But
+there are a number of other algorithms that can also remove noise.
+For example, \citet{2002dip..book.....G} describe an adaptive median
+filter algorithm that varies the size-scale of the area over which
+the median is calculated based on local greyscale values in the
+image. Two-dimensional wavelets, along with thresholding algorithms
+could be used to determine global (or local) noise levels, segmenting
+the wavefront from the data.
+
+An operational implementation of the AWARE algorithm would begin with
+a source event occurring at some point in space and time.  Data
+providers would be queried for the relevant image data.  Once that
+data was available and downloaded, AWARE would be used to perform the
+image processing and wave assessment steps, finally writing a record
+into a database that is easily accessed through existing solar feature
+and event databases.  AWARE does not yet have that capability;
+however, the simple image processing algorithm outlined here is the
+crucial part in turning the desire for automated EUV wave event
+detection into a reliably functioning asset for the solar physics
+community.
+
+We have demonstrated the core functionality of AWARE, a new algorithm
+for the detection and characterization of EUV waves in the solar
+corona. As shown in Section \ref{sec:results}, AWARE performs
+effectively, providing confirmed detections of wave both for simulated
+wave data with known parameters, and also for a number of real EUV
+wave events (see Figure \ref{results_figure}). In both cases, mimimal
+human input was required in order to acheive the presented results.
+
+The next steps in the development are already underway (see Section
+\ref{sec:future}), including the construction of a consistent AWARE
+data product for disemmination to the solar community. This product
+will include metadata on any detected EUV waves, as well as image
+masks of the detected events. Additional steps will include further
+integration with online heliophysics tools, such as the HEK and VSO
+services.
 
 \input{acknowledgements}
 
