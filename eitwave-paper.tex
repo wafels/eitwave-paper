@@ -1,125 +1,114 @@
+\documentclass[namedreferences]{solarphysics}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                                                
-%%      SWSC LaTeX class for Journal of Space Weather and Space Climate
-%%      
-%%                                      (c) Springer-Verlag HD
-%%                                      revised by EDP Sciences
-%%                                      further revised by J. Watermann 
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%%      This demonstration file was derived from aa.dem
-%%  
-%%      AA vers. 7.0, LaTeX class for Astronomy & Astrophysics
-%%      demonstration file
-%%                                                (c) Springer-Verlag HD
-%%                                                revised by EDP Sciences
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%%      modified for Journal of Space Weather and Space Climate
-%%      by Jurgen Watermann, Editorial Advisor to SWSC
-%%
-%%      01-04-2012
-%%      02-04-2012 revision 1
-%%      12-07-2012 revision 2
-%%      06-12-2012 revision 3 
-%%      01-01-2014 revision 4
-%%      06-03-2014 revision 4.1
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%%      The two sub-figures referenced in this template are of eps and png type,
-%%      respectively, in order to demonstrate the usepackages subfigure and
-%%      epstopdf and thus create pdf-only output 
-%%
-%%      If you want to use TexLive or MikTex together with a bibtex bibliography 
-%%      file you may run Latex2e from the command line 
-%%          pdflatex -shell-escape swsc.tex
-%%          bibtex swsc (do not include an extension such as .tex or .bib)
-%%          pdflatex -shell-escape swsc.tex
-%%          pdflatex -shell-escape swsc.tex
-%%
-%%      A double call to pdflatex after calling bibtex is necessary in order to
-%%      set citations and references correctly and insure that foreward/backward  
-%%      linkage (backref option) is properly applied
-%%      If you use MikTex you may need to make a triple call to pdflatex
-%%
-%%      If you are using TexLive or MikTex but not a bibtex type of bibliography
-%%      you may simply run Latex2e twice from the command line 
-%%          pdflatex -shell-escape swsc.tex
-%%          pdflatex -shell-escape swsc.tex
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%%   single column 12-point version for review
-%%
+\usepackage[hyperref,optionalrh,showbiblabels]{spr-sola-addons} % For Solar Physics 
+%\usepackage[optionalrh]{spr-sola-addons} % For Solar Physics 
+%\usepackage{epsfig}          % For eps figures, old commands
+\usepackage{graphicx}        % For eps figures, newer & more powerfull
+%\usepackage{courier}         % Change the \texttt command to courier style
+%\usepackage{amssymb}        % useful mathematical symbols
+\usepackage{color}           % For color text: \color command
+\usepackage{breakurl}        % For breaking URLs easily trough lines
+\def\UrlFont{\sf}            % define the fonts for the URLs
 
-%%  with traditional abstract
-\documentclass[referee,a4paper,12pt,traditabstract]{swsc} 
+% General definitions
+% please place your own definitions here and don't use \def but
+% \newcommand{}{} or 
+% \renewcommand{}{} if it is already defined in LaTeX
 
-%%  with structured abstract 
-%\documentclass[referee,a4paper,12pt,structabstract]{swsc} 
+\newcommand{\BibTeX}{\textsc{Bib}\TeX}
+\newcommand{\etal}{{\it et al.}}
 
-\usepackage{graphicx}
-\usepackage{txfonts}
-\usepackage{subfigure}
-\usepackage{epstopdf}
-\usepackage{lineno}
-\usepackage[authoryear,round]{natbib}
-\usepackage[backref]{hyperref}
-\usepackage{url}
+% Definitions for equations
+\renewcommand{\vec}[1]{{\mathbfit #1}}
+\newcommand{\deriv}[2]{\frac{{\mathrm d} #1}{{\mathrm d} #2}}
+\newcommand{\rmd}{ {\ \mathrm d} }
+\newcommand{\uvec}[1]{ \hat{\mathbf #1} }
+\newcommand{\pder}[2]{ \f{\partial #1}{\partial #2} }
+\newcommand{\grad}{ {\bf \nabla } }
+\newcommand{\curl}{ {\bf \nabla} \times}
+\newcommand{\vol}{ {\mathcal V} }
+\newcommand{\bndry}{ {\mathcal S} }
+\newcommand{\dv}{~{\mathrm d}^3 x}
+\newcommand{\da}{~{\mathrm d}^2 x}
+\newcommand{\dl}{~{\mathrm d} l}
+\newcommand{\dt}{~{\mathrm d}t}
+\newcommand{\intv}{\int_{\vol}^{}}
+\newcommand{\inta}{\int_{\bndry}^{}}
+\newcommand{\avec}{ \vec A}
+\newcommand{\ap}{ \vec A_p}
 
+\newcommand{\bb}{\vec B}
+\newcommand{\jj}{ \vec j}
+\newcommand{\rr}{ \vec r}
+\newcommand{\xx}{ \vec x}
+
+% Definitions for the journal names
+\newcommand{\adv}{    {\it Adv. Space Res.}} 
+\newcommand{\annG}{   {\it Ann. Geophys.}} 
+\newcommand{\aap}{    {\it Astron. Astrophys.}}
+\newcommand{\aaps}{   {\it Astron. Astrophys. Suppl.}}
+\newcommand{\aapr}{   {\it Astron. Astrophys. Rev.}}
+\newcommand{\ag}{     {\it Ann. Geophys.}}
+\newcommand{\aj}{     {\it Astron. J.}} 
+\newcommand{\apj}{    {\it Astrophys. J.}}
+\newcommand{\apjl}{   {\it Astrophys. J. Lett.}}
+\newcommand{\apss}{   {\it Astrophys. Space Sci.}} 
+\newcommand{\cjaa}{   {\it Chin. J. Astron. Astrophys.}} 
+\newcommand{\gafd}{   {\it Geophys. Astrophys. Fluid Dyn.}}
+\newcommand{\grl}{    {\it Geophys. Res. Lett.}}
+\newcommand{\ijga}{   {\it Int. J. Geomagn. Aeron.}}
+\newcommand{\jastp}{  {\it J. Atmos. Solar-Terr. Phys.}} 
+\newcommand{\jgr}{    {\it J. Geophys. Res.}}
+\newcommand{\mnras}{  {\it Mon. Not. Roy. Astron. Soc.}}
+\newcommand{\nat}{    {\it Nature}}
+\newcommand{\pasp}{   {\it Pub. Astron. Soc. Pac.}}
+\newcommand{\pasj}{   {\it Pub. Astron. Soc. Japan}}
+\newcommand{\pre}{    {\it Phys. Rev. E}}
+\newcommand{\solphys}{{\it Solar Phys.}}
+\newcommand{\sovast}{ {\it Soviet  Astron.}} 
+\newcommand{\ssr}{    {\it Space Sci. Rev.}} 
+
+% Paper specific 
 \newcommand{\RDP}{RDP}
+\chardef\us=`\_
 
-%%    This version assumes using bibtex with the swsc bibliography style file
-\bibliographystyle{swsc}
-
-\hypersetup{colorlinks=true,citecolor=cyan,urlcolor=cyan,linkcolor=blue}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\begin{linenumbers}
+\begin{article}
+\begin{opening}
 
 \title{AWARE: An algorithm for the automated detection and characterization
   of EUV waves in the solar atmosphere}
 
+\author[addressref={aff1,aff2}, corref, email={jack.ireland@nasa.gov}]{\inits{J.}\fnm{Jack}~\lnm{Ireland}}%\sep
+\author[addressref={aff1,aff3}, email={a.r.inglis@nasa.gov}]{\inits{A.R.}\fnm{Andrew R.}~\lnm{Inglis}}%\sep
+\author[addressref={aff1}, email={a.y.shih@nasa.gov}]{\inits{A.Y.}\fnm{Albert Y.}~\lnm{Shih}}%\sep
+\author[addressref={aff1}, email={s.christe@nasa.gov}]{\inits{S.}\fnm{Steven}~\lnm{Christe}}%\sep
+\author[addressref={aff4}, email={stuart@cadair.com}]{\inits{S.}\fnm{Stuart}~\lnm{Mumford}}%\sep
+\author[addressref={aff5}, email={hayesla@tcd.ie}]{\inits{L. A.}\fnm{Laura A.}~\lnm{Hayes}}%\sep
+\author[addressref={aff1}, email={b.j.thompson@nasa.gov}]{\inits{B. J.}\fnm{Barbara J.}~\lnm{Thompson}}%\sep
+%\author{\inits{}\fnm{}~\lnm{}\orcid{}}
+%\author{P.~\surname{Author-a}$^{1}$\sep
+%        E.~\surname{Author-b}$^{1}$\sep
+%        M.~\surname{Author-c}$^{2}$      
+%       }
 
-   \subtitle{ }
-   
-   \titlerunning{An algorithm for the automated detection of EUV waves}
+%   \institute{$^{1}$ First affiliation
+%                     email: \url{e.mail-a} email: \url{e.mail-b}\\ 
+%              $^{2}$ Second affiliation
+%                     email: \url{e.mail-c} \\
+%             }
+\address[id=aff1]{ADNET Systems, Inc.}
+\address[id=aff2]{NASA Goddard Spaceflight Center, Greenbelt, MD 20771, USA.}
+\address[id=aff3]{Catholic University of America.}
+\address[id=aff4]{University of Sheffield, Sheffield, UK.}
+\address[id=aff5]{Trinity College Dublin, Dublin, Ireland.}
 
-   \authorrunning{Ireland et al.}
+\runningauthor{J. Ireland et al.}
+\runningtitle{An algorithm for the automated detection of EUV waves}
 
-
-%\input{authors}
-
-\author{J. Ireland\inst{1,}\inst{2}\and
-        A. R. Inglis\inst{2,}\inst{3}\and
-        A. Y. Shih\inst{2}\and
-        S. Christe\inst{2}\and
-        S. Mumford\inst{4}\and
-        L. A. Hayes\inst{5}\and
-        B. J. Thompson\inst{2}
-          }
-
-\institute{ADNET Systems, Inc.\\
-\email{\href{mailto:jack.ireland@nasa.gov}{jack.ireland@nasa.gov}}
-\and
-NASA Goddard Space Flight Center, MC 671.1, Greenbelt, MD 20771.
-\and
-Physics Department, The Catholic University of America,Washington, DC, 20064
-\and
-Solar Physics and Space Plasma Research Centre (SP$^{2}$RC), School of Mathematics and Statistics, The University of Sheffield, Hicks Building, Hounsfield Road, Sheffield S3 7RH, UK.
-\and
-School of Physics, Trinity College Dublin, Dublin 2, Ireland.
-}
-
-
-\abstract{Extreme ultraviolet (EUV) waves are large-scale propagating
+\begin{abstract}Extreme ultraviolet (EUV) waves are large-scale propagating
 disturbances observed in the solar corona, frequently associated with
 coronal mass ejections and flares. Since their discovery, over two
 hundred papers discussing their properties, causes and physical nature have
@@ -134,11 +123,36 @@ wavefront, and measures the distance, velocity and acceleration of
 that wavefront across the Sun.  The algorithm is applied to
 simulations of EUV wave propagation and to observed data.  Suggestions
 are also given for further refinements to the basic algorithm presented
-here.}
+here.
+\end{abstract}
+
+%\input{authors}
+%
+%\author{J. Ireland\inst{1,}\inst{2}\and
+%       A. R. Inglis\inst{2,}\inst{3}\and
+%         A. Y. Shih\inst{2}\and
+%         S. Christe\inst{2}\and
+%         S. Mumford\inst{4}\and
+%         L. A. Hayes\inst{5}\and
+%         B. J. Thompson\inst{2}
+%           }
+% 
+% \institute{ADNET Systems, Inc.\\
+% \email{\href{mailto:jack.ireland@nasa.gov}{jack.ireland@nasa.gov}}
+% \and
+%  NASA Goddard Space Flight Center, MC 671.1, Greenbelt, MD 20771.
+% \and
+%  Physics Department, The Catholic University of America,Washington, DC, 20064
+% \and
+%  Solar Physics and Space Plasma Research Centre (SP$^{2}$RC), School of Mathematics and Statistics, The University of Sheffield, Hicks Building, Hounsfield Road, Sheffield S3 7RH, UK.
+% \and
+%  School of Physics, Trinity College Dublin, Dublin 2, Ireland.
+% }
+
 
 \keywords{giant planet formation -- $\kappa$-mechanism -- stability of gas spheres}
 
-\maketitle
+\end{opening}
 
 \section{Introduction}\label{sec:Intro}
 
@@ -607,77 +621,6 @@ the spread in the detection quality.
 
 \section{Results}\label{sec:results}
 
-<<<<<<< HEAD
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{longetal2014_figure4_wave_progress_map.eps}
-
-\caption{Example detection}
-\label{corpita_fig4}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{longetal2014_figure8a_wave_progress_map.eps}
-\caption{Example detection}
-\label{corpita_fig8a}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{euvwave_contour_map_corpita_fig6.eps}
-\caption{Example detection}
-\label{corpita_fig6}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{euvwave_contour_map_corpita_fig8e.eps}
-\caption{Example detection}
-\label{corpita_fig8e}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{euvwave_contour_map_previous1.eps}
-\caption{Example detection}
-\label{previous1}
-\end{center}
-\end{figure}
-=======
-
-\subsection{Detections with SDO/AIA image data}
-
-To illustrate the application of the AWARE algorithm to real solar imaging data, we examine a selection of recent events observed by SDO/AIA. These are the flares of 2011 February 13, 2011 February 15, 2011 February 16, and 2011 October 1. These flares serve as a convenient starting point for the search algorithm, given that EUV waves are considered to be triggered phenomenon. 
-
-Figure \ref{results_figure} shows both the result of AWARE image processing (top panels), and wave characterization (bottom panels) steps. For all 4 events, the image processing reveals a propagating front of substantial extent. In Figure \ref{results_figure}, this is illustrated by the coloured maps in the top panels. These maps show the location of the brightest detected features as a function of time, ranging from blue (early times) to red (later times). Differences between the four events are immediately apparent; the 2011 February 15 event propagates outward in all directions approximately circularly. In contrast, the 2011 February 13 and 16 events propagate in narrow cones only, while the 2011 October 1 events extends in a significant arc towards solar southeast. 
-
-For each event, we show an example of the wave characterization along a specific arc of interest (grey arcs, top panels). The arc selected for analysis in each case is the one with the highest quality score, as discussed in Section \ref{wave_char} The resulting velocity fits are shown in Figure \ref{results_figure} (bottom panels), where a quadratic profile has been fit to the angular distance of the detected wavefront. 
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=4cm]{euvwave_contour_map_previous1.eps}
-\includegraphics[width=4cm]{euvwave_contour_map_corpita_fig7.eps}
-\includegraphics[width=4cm]{euvwave_contour_map_corpita_fig8a.eps}
-\includegraphics[width=4cm]{euvwave_contour_map_corpita_fig8e.eps}
-
-\includegraphics[width=4cm]{previous1.dynamics.27.eps}
-\includegraphics[width=4cm]{corpita_fig7.dynamics.2.eps}
-\includegraphics[width=4cm]{corpita_fig8a.dynamics.40.eps}
-\includegraphics[width=4cm]{corpita_fig8e.dynamics.71.eps}
-\caption{The propagation of detected EUV waves as a function of time, for a) 2011 October 1, b) 2011 February 13, c) 2011 February 15, d) 2011 February 16. For each event, a background image of the Sun is shown, while the colours represent the location of the wavefront detected by AWARE at a given time.}
-\end{center}
-\end{figure}
-
-
-
-
->>>>>>> b85469fa74b83b4f42b1e586a6318236d8709bca
-
 \section{Future improvements and data products}\label{sec:future}
 
 Several future refinements are currently planned in order to improve
@@ -752,10 +695,22 @@ masks of the detected events. Additional steps will include further
 integration with online heliophysics tools, such as the HEK and VSO
 services.
 
-\input{acknowledgements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{acks}
+We are grateful to the developers of SSWIDL \citep{ssw}, IPython
+\citep{ipython}, SunPy \citep{mumford-proc-scipy-2013}, PyMC
+\citep{pymc2010}, matplotlib \citep{Hunter:2007:matplotlib} and the
+Scientific Python stack for providing data preparation, manipulation,
+analysis and display packages.  LH and JI acknowledge the support of
+the Solar Data Analysis Center (SDAC).\end{acks}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{spr-mp-sola}
 
 \bibliography{eitwave-paper.bib}
 
-\end{linenumbers}
+
+\end{article} 
 
 \end{document}
